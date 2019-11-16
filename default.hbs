@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{lang}}">
+<html lang="{{@site.lang}}">
 <head>
 
     {{!-- Document Settings --}}
@@ -32,18 +32,13 @@
     <div class="site-wrapper">
 
         {{!-- Sidebar (Landscape) / Header (Portrait) --}}
-        <div id="sidebar" {{#if @blog.cover_image}}style="background-image: url({{@blog.cover_image}})"{{/if}}>
+        <div id="sidebar" {{#if @site.cover_image}}style="background-image: url({{@site.cover_image}})"{{/if}}>
             <div>
                 {{!-- Header --}}
                 {{> "site-header"}}
             </div>
-            <div class="search-form">
-                <div class="search-form-content">
-                    {{> "search-form"}}
-                </div>
-            </div>
             <nav class="main-nav">
-                {{#if @blog.navigation}}
+                {{#if @site.navigation}}
                 {{navigation}}
                 {{/if}}
             </nav>
@@ -56,9 +51,6 @@
         {{!-- All the main content gets inserted here, index.hbs, post.hbs, etc --}}
         <main id="site-main" class="site-main outer">
             <div class="inner">
-                <div class="search-results">
-                    {{> "search-results"}}
-                </div>
                 <div class="main-body">
                     {{{body}}}
                 </div>
@@ -84,15 +76,6 @@
             container.style.flex = ratio + ' 1 0%';
         })
     </script>
-
-
-    {{!-- jQuery + Fitvids, which makes all video embeds responsive --}}
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="{{asset "built/jquery.fitvids.js"}}"></script>
-
-    {{!-- ghostHunter --}}
-    <script type="text/javascript" src="{{asset "js/jquery.ghosthunter.min.js"}}"></script>
-    <script type="text/javascript" src="{{asset "js/jquery.ghosthunter-staypuft.js"}}"></script>
 
     {{!-- Prism --}}
     <script type="text/javascript" src="{{asset "js/prism/prism-preprocessor.js"}}"></script>

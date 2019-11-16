@@ -30,13 +30,7 @@ function handleError(done) {
     };
 }
 
-gulp.task('build', ['css', 'js'], function (/* cb */) {
-    return nodemonServerInit();
-});
-
-gulp.task('generate', ['css', 'js']);
-
-gulp.task('css', function (done) {
+gulp.task('css', gulp.series(function (done) {
     var processors = [
         easyimport,
         customProperties,
@@ -53,9 +47,9 @@ gulp.task('css', function (done) {
         gulp.dest('assets/built/'),
         livereload()
     ], handleError(done));
-});
+}));
 
-gulp.task('js', function (done) {
+gulp.task('js', gulp.series(function (done) {
     var jsFilter = filter(['**/*.js'], {restore: true});
 
     pump([
@@ -68,13 +62,19 @@ gulp.task('js', function (done) {
         gulp.dest('assets/built/'),
         livereload()
     ], handleError(done));
-});
+}));
 
-gulp.task('watch', function () {
+gulp.task('build', gulp.series(['css', 'js'], function (/* cb */) {
+    return nodemonServerInit();
+}));
+
+gulp.task('generate', gulp.series(['css', 'js']));
+
+gulp.task('watch', gulp.series(function () {
     gulp.watch('assets/css/**', ['css']);
-});
+}));
 
-gulp.task('zip', ['css', 'js'], function (done) {
+gulp.task('zip', gulp.series(['css', 'js'], function (done) {
     var targetDir = 'dist/';
     var themeName = require('./package.json').name;
     var filename = themeName + '.zip';
@@ -88,8 +88,8 @@ gulp.task('zip', ['css', 'js'], function (done) {
         zip(filename),
         gulp.dest(targetDir)
     ], handleError(done));
-});
+}));
 
-gulp.task('default', ['build'], function () {
+gulp.task('default', gulp.series(['build'], function () {
     gulp.start('watch');
-});
+}));
