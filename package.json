@@ -1,18 +1,14 @@
 {
     "name": "jos-staypuft",
     "description": "A personal blogging theme for Ghost. Beautiful, minimal and responsive.",
-    "homepage": "https://github.com/dlecina/StayPuft",
-    "demo": "https://github.com/dlecina/StayPuft#demo",
+    "homepage": "https://github.com/joseftw/JOS.StayPuft",
+    "demo": "https://josefottosson.se",
     "version": "3.0.0",
     "engines": {
         "ghost": ">=3.0.0",
         "ghost-api": "v3"
     },
     "license": "MIT",
-    "screenshots": {
-        "desktop": "assets/screenshots/screenshot-desktop.png",
-        "mobile": "assets/screenshots/screenshot-mobile.png"
-    },
     "scripts": {
         "dev": "gulp",
         "zip": "gulp zip",
@@ -21,9 +17,8 @@
         "ship": "STATUS=$(git status --porcelain); echo $STATUS; if [ -z \"$STATUS\" ]; then yarn version && git push --follow-tags; fi"
     },
     "author": {
-        "name": "David Lecina",
-        "email": "dlecina13@gmail.com",
-        "url": "https://github.com/dlecina"
+        "name": "Josef Ottosson",
+        "url": "https://github.com/joseftw"
     },
     "gpm": {
         "type": "theme",
@@ -39,11 +34,11 @@
     ],
     "repository": {
         "type": "git",
-        "url": "https://github.com/dlecina/StayPuft.git"
+        "url": "https://github.com/joseftw/JOS.StayPuft.git"
     },
-    "bugs": "https://github.com/dlecina/StayPuft/issues",
+    "bugs": "https://github.com/joseftw/JOS.StayPuft/issues",
     "contributors": [
-        "https://github.com/dlecina/StayPuft/graphs/contributors"
+        "https://github.com/joseftw/JOS.StayPuft/graphs/contributors"
     ],
     "devDependencies": {
         "autoprefixer": "6.3.6",
