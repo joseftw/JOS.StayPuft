@@ -2,12 +2,12 @@
 <footer class="site-footer">
     <div class="site-footer-content">
         <nav class="site-footer-subscribe">
-            <a href="{{@site.url}}/rss/" target="_blank"><i class="fas fa-rss"></i>Subscribe via RSS</a>
-            {{#if @labs.subscribers}}<a href="#subscribe"><i class="fas fa-envelope"></i>Subscribe via email</a>{{/if}}
+            <a href="{{@site.url}}/rss/" target="_blank"><i class="fa fa-rss"></i>Subscribe via RSS</a>
+            {{#if @labs.subscribers}}<a href="#subscribe"><i class="fa fa-envelope"></i>Subscribe via email</a>{{/if}}
         </nav>
         <nav class="site-footer-external">
-            {{#if @site.facebook}}<a href="{{facebook_url @site.facebook}}" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>{{/if}}
-            {{#if @site.twitter}}<a href="{{twitter_url @site.twitter}}" target="_blank" rel="noopener"><i class="fab fa-twitter"></i></a>{{/if}}
+            {{#if @site.facebook}}<a href="{{facebook_url @site.facebook}}" target="_blank" rel="noopener"><i class="fa fa-facebook-f"></i></a>{{/if}}
+            {{#if @site.twitter}}<a href="{{twitter_url @site.twitter}}" target="_blank" rel="noopener"><i class="fa fa-twitter"></i></a>{{/if}}
             {{> "custom/nav-external"}}
         </nav>
         <nav class="site-footer-text">

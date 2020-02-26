@@ -3,7 +3,7 @@
     "description": "A personal blogging theme for Ghost. Beautiful, minimal and responsive.",
     "homepage": "https://github.com/joseftw/JOS.StayPuft",
     "demo": "https://josefottosson.se",
-    "version": "3.0.0",
+    "version": "3.4.0",
     "engines": {
         "ghost": ">=3.0.0",
         "ghost-api": "v3"

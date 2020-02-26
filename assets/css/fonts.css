@@ -1,0 +1,47 @@
+@font-face {
+  font-family: 'josefottossonse';
+  src:
+    url('fonts/josefottossonse.ttf?4bsxzx') format('truetype'),
+    url('fonts/josefottossonse.woff?4bsxzx') format('woff'),
+    url('fonts/josefottossonse.svg?4bsxzx#josefottossonse') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+.fa {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'josefottossonse' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.fa-tag:before {
+  content: "\f02b";
+}
+.fa-tags:before {
+  content: "\f02c";
+}
+.fa-calendar:before {
+  content: "\f073";
+}
+.fa-twitter:before {
+  content: "\f099";
+}
+.fa-github:before {
+  content: "\f09b";
+}
+.fa-rss:before {
+  content: "\f09e";
+}
+.fa-linkedin-in:before {
+  content: "\f0e1";
+}

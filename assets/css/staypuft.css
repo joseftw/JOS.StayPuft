@@ -99,7 +99,6 @@ a:hover {
     border-radius: var(--radius3);
     background: none;
     color: var(--sidebar-link-color);
-    border: 1px solid color(var(--sidebar-link-color) a(0.4));
     transition: all 0.3s ease;
     text-align: center;
 }
