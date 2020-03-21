@@ -1,18 +1,57 @@
+<button class="btn btn-default" id="load_comments">Load comments</button>
 <div id="disqus_thread"></div>
 <script>
-    {{> "custom/disqus"}}
+  const disqus_shortname = 'josefottosson';
+  const disqus_identifier = "ghost-{{comment_id}}";
+  var disqus_config = function () {
+    this.page.identifier = disqus_identifier;
+  };
 
-    var disqus_config = function () {
-        this.page.identifier = "ghost-{{comment_id}}";
+  const commentsButton = document.getElementById('load_comments');
+  let is_disqus_loaded = false;
+  function loadComments() {
+    if(!is_disqus_loaded){
+      is_disqus_loaded = true;
+      const doc = document;
+      const s = doc.createElement('script');
+      s.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+      (doc.head || doc.body).appendChild(s);
+      commentsButton.classList.add('hidden');
+    }
+  }
+// add click handler to comments button to load comments, and emit event to GA
+  if(commentsButton) {
+    commentsButton.addEventListener('click', function(){
+    if(ga && typeof(ga) === 'function'){
+      ga('send', 'event', {
+        eventCategory: 'Load Comments',
+        eventAction: 'click',
+        eventLabel: disqus_identifier
+      });
     };
+    loadComments();
+  });
+  }
+// load comments for search engines to index
+  if(/bot|google|baidu|bing|msn|duckduckgo|slurp|yandex/i.test(navigator.userAgent)){
+    loadComments();
+  }
+// load comments if URL hash contains #comment
+  if(location && location.hash && location.hash.includes('comment')){
+    loadComments();
+  }
+// load comments when comments enter viewport
+  if(!!window.IntersectionObserver){
+    const commentBox = document.querySelector('.post-full-comments');
 
-    (function () {
-        var d = document, s = d.createElement('script');
-        s.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
-        s.setAttribute('defer', true);
-        s.setAttribute('data-timestamp', +new Date());
-        (d.body).appendChild(s);
-    })();
+    const intersectionObserver = new IntersectionObserver(function(entries, observer){
+      if(entries && entries[0] && entries[0].isIntersecting){
+        loadComments();
+        observer.unobserve(commentBox);
+      }
+    });
+    intersectionObserver.observe(commentBox);
+  }
 </script>
 <noscript>Please enable JavaScript to view the
     <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>

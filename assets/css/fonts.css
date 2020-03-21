@@ -1,9 +1,9 @@
 @font-face {
   font-family: 'josefottossonse';
   src:
-    url('fonts/josefottossonse.ttf?4bsxzx') format('truetype'),
-    url('fonts/josefottossonse.woff?4bsxzx') format('woff'),
-    url('fonts/josefottossonse.svg?4bsxzx#josefottossonse') format('svg');
+    url('../css/fonts/josefottossonse.ttf?4bsxzx') format('truetype'),
+    url('../css/fonts/josefottossonse.woff?4bsxzx') format('woff'),
+    url('../css/fonts/josefottossonse.svg?4bsxzx#josefottossonse') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
