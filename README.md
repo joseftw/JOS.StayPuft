@@ -10,6 +10,6 @@ Works with ghost 3.0+
 * Lazy loading of Disqus
 * Custom Fontawesome font (only contains icons that are being used by the theme).
 
-## Fetures comming soon:
+## Fetures coming soon:
 
 * Lazy loading of images
