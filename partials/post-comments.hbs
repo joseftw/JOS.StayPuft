@@ -4,6 +4,7 @@
   const disqus_shortname = 'josefottosson';
   const disqus_identifier = "ghost-{{comment_id}}";
   var disqus_config = function () {
+    this.page.url = '{{url absolute=true}}';
     this.page.identifier = disqus_identifier;
   };
 
