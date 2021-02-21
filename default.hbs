@@ -18,7 +18,7 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
     
     {{!-- Fonts --}}
-    <link rel="stylesheet" href="{{asset "built/fonts.css"}}" >
+    <link rel="preload" as="style" href="{{asset "built/fonts.css"}}" >
     {{!-- Prism --}}
     <link rel="stylesheet" type="text/css" href="{{asset "built/prism.css"}}" />
 
@@ -65,7 +65,7 @@
 
     {{> "subscribe-overlay"}}
 
-    <script>
+    <script defer="true">
         var images = document.querySelectorAll('.kg-gallery-image img');
         images.forEach(function (image) {
             var container = image.closest('.kg-gallery-image');
@@ -77,7 +77,7 @@
     </script>
 
     {{!-- Prism --}}
-    <script type="text/javascript" src="{{asset "js/prism/prism.js"}}"></script>
+    <script defer="true" type="text/javascript" src="{{asset "js/prism/prism.js"}}"></script>
 
     {{#if pagination.pages}}
     <script defer="true" src="{{asset "built/infinitescroll.js"}}"></script>
