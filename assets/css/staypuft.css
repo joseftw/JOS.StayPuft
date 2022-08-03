@@ -12,7 +12,7 @@
 /* Variables
 /* ---------------------------------------------------------- */
 :root {
-    --sans-serif: 'Open Sans', sans-serif;
+    --sans-serif: 'Arial', sans-serif;
     --text-color: #3c484e;
     --link-color: #273c75;
     --link-hover-color: #00a8ff;

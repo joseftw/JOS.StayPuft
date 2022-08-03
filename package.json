@@ -3,10 +3,9 @@
     "description": "A personal blogging theme for Ghost. Beautiful, minimal and responsive.",
     "homepage": "https://github.com/joseftw/JOS.StayPuft",
     "demo": "https://josef.codes",
-    "version": "4.0.1",
+    "version": "4.0.2",
     "engines": {
-        "ghost": ">=3.0.0",
-        "ghost-api": "v3"
+        "ghost": ">=3.0.0"
     },
     "license": "MIT",
     "scripts": {
@@ -45,7 +44,7 @@
         "autoprefixer": "6.3.6",
         "beeper": "^1.1.1",
         "cssnano": "3.7.1",
-        "gscan": "^2.2.1",
+        "gscan": "4.34.0",
         "gulp": "^4.0.0",
         "gulp-filter": "5.1.0",
         "gulp-livereload": "3.8.1",
