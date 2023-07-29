@@ -2,19 +2,15 @@
 <footer class="site-footer">
     <div class="site-footer-content">
         <nav class="site-footer-subscribe">
-            <a href="{{@site.url}}/rss/" target="_blank"><i class="fa fa-rss"></i>Subscribe via RSS</a>
+            <a href="{{@site.url}}/rss/" aria-label="Link to RSS feed" target="_blank"><i class="fa fa-rss"></i>Subscribe via RSS</a>
             {{#if @labs.subscribers}}<a href="#subscribe"><i class="fa fa-envelope"></i>Subscribe via email</a>{{/if}}
         </nav>
         <nav class="site-footer-external">
-            {{#if @site.facebook}}<a href="{{facebook_url @site.facebook}}" target="_blank" rel="noopener"><i class="fa fa-facebook-f"></i></a>{{/if}}
-            {{#if @site.twitter}}<a href="{{twitter_url @site.twitter}}" target="_blank" rel="noopener"><i class="fa fa-twitter"></i></a>{{/if}}
+            {{#if @site.facebook}}<a href="{{facebook_url @site.facebook}}" aria-label="Link to Facebook" target="_blank" rel="noopener"><i class="fa fa-facebook-f"></i></a>{{/if}}
+            {{#if @site.twitter}}<a href="{{twitter_url @site.twitter}}" aria-label="Link to Twitter" target="_blank" rel="noopener"><i class="fa fa-twitter"></i></a>{{/if}}
         </nav>
         <nav class="site-footer-text">
-            <section class="copyright">&copy; <a href="{{@site.url}}">{{@site.title}}</a> {{date format="YYYY"}}</section>
-        </nav>
-        <nav class="site-footer-text">
-            <a href="https://ghost.org" target="_blank" rel="noopener">Ghost</a> &amp;
-            <a href="https://github.com/dlecina/StayPuft" target="_blank" rel="noopener">StayPuft</a>
+            <section class="copyright">&copy; <a href="{{@site.url}}" aria-label="Link to homepage">{{@site.title}}</a> {{date format="YYYY"}}</section>
         </nav>
     </div>
 </footer>
