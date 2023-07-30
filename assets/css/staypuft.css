@@ -465,20 +465,9 @@ pre + pre,
 
     .portrait { display: none; }
 
-    #sidebar {
-        position: fixed;
-        width: var(--sidebar-width);
-        height: 100%;
-    }
-
     #sidebar footer {
         position: absolute;
         bottom: 0;
-    }
-
-    #site-main {
-        position: absolute;
-        left: var(--sidebar-width);
     }
 
     .floating-header {

@@ -10,7 +10,21 @@
     <title>{{meta_title}}</title>
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+          @media (min-width: 1280px)
+          {
+            #sidebar {
+                position: fixed;
+                width: 320px;
+                height: 100%;
+            }
 
+            #site-main {
+                position: absolute;
+                left: 320px;
+            }
+          }
+    </style>
     {{!-- Styles'n'Scripts --}}
     <link rel="preload" href="{{asset "built/staypuft.css"}}" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="{{asset "built/staypuft.css"}}"></noscript>
