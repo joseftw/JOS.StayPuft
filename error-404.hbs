@@ -11,8 +11,63 @@ It's a good idea to keep this template as minimal as possible in terms of both f
     <title>{{meta_title}}</title>
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="{{asset "built/staypuft.css"}}" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+    <style>
+        @media (min-width: 1280px)
+        {
+            #sidebar {
+                position: fixed;
+                width: 320px;
+                height: 100%;
+            }
+
+            #site-main {
+                position: absolute;
+                left: 320px;
+            }
+        }
+        .post-card {
+            flex: 1 1 300px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            margin: 0 20px 40px;
+            min-height: 300px;
+            background: #fff center center;
+            background-size: cover;
+            border-radius: 5px;
+            box-shadow: rgba(39,44,49,0.06) 8px 14px 38px, rgba(39, 44, 49, 0.03) 1px 3px 8px;
+            transition: all 0.5s ease;
+        }
+
+        .post-card-content {
+            -ms-flex-positive: 1;
+            flex-grow: 1;
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            -ms-flex-pack: justify;
+            justify-content: space-between;
+        }
+
+        .post-card-tags {
+            display: block;
+            margin-bottom: 4px;
+            color: #000;
+            font-size: 1.2rem;
+            line-height: 1.15em;
+            font-weight: 500;
+            letter-spacing: .5px;
+            text-transform: uppercase;
+        }
+    </style>
+    {{!-- Styles'n'Scripts --}}
+    <link rel="preload" href="{{asset "built/staypuft.css"}}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="{{asset "built/staypuft.css"}}"></noscript>
+    <link rel="preload" as="style" href="{{asset "built/fonts.css"}}" >
+    {{!-- Prism --}}
+    <link rel="preload" href="{{asset "built/prism.css"}}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="{{asset "built/prism.css"}}"></noscript>
 </head>
 <body class="error-template">
     <div class="site-wrapper">
@@ -28,7 +83,7 @@ It's a good idea to keep this template as minimal as possible in terms of both f
                 {{> "site-footer" }}
             </div>
         </div>
-        
+
         <main id="site-main" class="site-main outer">
             <div class="inner">
                 {{!-- Error --}}
