@@ -1,17 +1,44 @@
-<script src="https://giscus.app/client.js"
-        data-repo="joseftw/my-blog.discussions"
-        data-repo-id="R_kgDOKO5DLg"
-        data-category="Announcements"
-        data-category-id="DIC_kwDOKO5DLs4CZDkK"
-        data-mapping="pathname"
-        data-strict="1"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="top"
-        data-theme="light_protanopia"
-        data-lang="en"
-        data-loading="lazy"
-        crossorigin="anonymous"
-        async>
+<script>
+  let commentsLoaded = false;
+  function loadComments() {
+    if(!commentsLoaded){
+      commentsLoaded = true;
+      const doc = document;
+      const s = doc.createElement('script');
+      s.src = 'https://giscus.app/client.js';
+      s.dataset.repo = 'joseftw/my-blog.discussions';
+      s.dataset.repoId = 'R_kgDOKO5DLg';
+      s.dataset.category = 'Announcements';
+      s.dataset.categoryId = 'DIC_kwDOKO5DLs4CZDkK';
+      s.dataset.mapping = 'pathname';
+      s.dataset.strict = '1';
+      s.dataset.reactionsEnabled = '1';
+      s.dataset.emitMetadata = '0';
+      s.dataset.inputPosition = 'top';
+      s.dataset.theme = 'light_protanopia';
+      s.dataset.lang = 'en';
+      s.dataset.loading = 'lazy';
+      s.dataset.crossorigin = 'anonymous';
+      (doc.head || doc.body).appendChild(s);
+    }
+  }
+// load comments for search engines to index
+  if(/bot|google|baidu|bing|msn|duckduckgo|slurp|yandex/i.test(navigator.userAgent)){
+    loadComments();
+  }
+// load comments if URL hash contains #comment
+  if(location && location.hash && location.hash.includes('comment')){
+    loadComments();
+  }
+// load comments when comments enter viewport
+  if(!!window.IntersectionObserver){
+    const commentBox = document.querySelector('.post-full-comments');
+    const intersectionObserver = new IntersectionObserver(function(entries, observer){
+      if(entries && entries[0] && entries[0].isIntersecting){
+        loadComments();
+        observer.unobserve(commentBox);
+      }
+    });
+    intersectionObserver.observe(commentBox);
+  }
 </script>
-<noscript>Please enable JavaScript to view the comments.</noscript>
