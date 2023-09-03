@@ -19,7 +19,7 @@
       s.dataset.lang = 'en';
       s.dataset.loading = 'lazy';
       s.dataset.crossorigin = 'anonymous';
-      (doc.head || doc.body).appendChild(s);
+      doc.getElementById("comments-section").appendChild(s);
     }
   }
 // load comments for search engines to index
