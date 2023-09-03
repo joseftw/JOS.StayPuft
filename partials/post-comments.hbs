@@ -1,59 +1,17 @@
-<button class="btn btn-default" id="load_comments">Load comments</button>
-<div id="disqus_thread"></div>
-<script>
-  const disqus_shortname = 'josefottosson';
-  const disqus_identifier = "ghost-{{comment_id}}";
-  var disqus_config = function () {
-    this.page.url = '{{url absolute=true}}';
-    this.page.identifier = disqus_identifier;
-  };
-
-  const commentsButton = document.getElementById('load_comments');
-  let is_disqus_loaded = false;
-  function loadComments() {
-    if(!is_disqus_loaded){
-      is_disqus_loaded = true;
-      const doc = document;
-      const s = doc.createElement('script');
-      s.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
-      (doc.head || doc.body).appendChild(s);
-      commentsButton.classList.add('hidden');
-    }
-  }
-// add click handler to comments button to load comments, and emit event to GA
-  if(commentsButton) {
-    commentsButton.addEventListener('click', function(){
-    if(ga && typeof(ga) === 'function'){
-      ga('send', 'event', {
-        eventCategory: 'Load Comments',
-        eventAction: 'click',
-        eventLabel: disqus_identifier
-      });
-    };
-    loadComments();
-  });
-  }
-// load comments for search engines to index
-  if(/bot|google|baidu|bing|msn|duckduckgo|slurp|yandex/i.test(navigator.userAgent)){
-    loadComments();
-  }
-// load comments if URL hash contains #comment
-  if(location && location.hash && location.hash.includes('comment')){
-    loadComments();
-  }
-// load comments when comments enter viewport
-  if(!!window.IntersectionObserver){
-    const commentBox = document.querySelector('.post-full-comments');
-
-    const intersectionObserver = new IntersectionObserver(function(entries, observer){
-      if(entries && entries[0] && entries[0].isIntersecting){
-        loadComments();
-        observer.unobserve(commentBox);
-      }
-    });
-    intersectionObserver.observe(commentBox);
-  }
+<script src="https://giscus.app/client.js"
+        data-repo="joseftw/my-blog.discussions"
+        data-repo-id="R_kgDOKO5DLg"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOKO5DLs4CZDkK"
+        data-mapping="pathname"
+        data-strict="1"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light_protanopia"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
 </script>
-<noscript>Please enable JavaScript to view the
-    <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
-</noscript>
+<noscript>Please enable JavaScript to view the comments.</noscript>

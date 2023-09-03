@@ -7,7 +7,7 @@ Works with ghost 3.0+
 
 ## Features
 
-* Lazy loading of Disqus
+* Giscus comments
 * Custom Fontawesome font (only contains icons that are being used by the theme).
 
 ## Fetures coming soon:
