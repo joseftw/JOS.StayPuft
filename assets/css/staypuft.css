@@ -23,6 +23,10 @@
     --search-placeholder-color: color(white a(0.5));
     --radius3: 0;
     --radius5: 0;
+    --accent-color: #273c75;
+    --accent-color-r: 39;
+    --accent-color-g: 60;
+    --accent-color-b: 117;
 }
 
 /* Overrides

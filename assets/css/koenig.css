@@ -1,0 +1,617 @@
+/* Koenig Card Styles for Ghost 5+ compatibility */
+
+/* ============================================
+   Callout Cards
+   ============================================ */
+.kg-callout-card {
+    display: flex;
+    padding: 1.2em 1.6em;
+    border-radius: 3px;
+    margin: 1.6em 0 1.6em 0;
+}
+
+.kg-callout-card-emoji {
+    padding-right: .5em;
+    line-height: 1.3em;
+    font-size: 1.25em;
+}
+
+.kg-callout-card-text {
+    font-size: .95em;
+    line-height: 1.5em;
+}
+
+.kg-callout-card-background-grey {
+    background: rgba(124, 139, 154, 0.13);
+    border-left: 4px solid #738a94;
+}
+
+.kg-callout-card-background-white {
+    background: rgba(255, 255, 255, 0.95);
+    border-left: 4px solid #e5eff5;
+    box-shadow: 0 2px 6px -2px rgba(0, 0, 0, 0.1), 0 0 1px rgba(0, 0, 0, 0.4);
+}
+
+.kg-callout-card-background-blue {
+    background: rgba(33, 172, 232, 0.12);
+    border-left: 4px solid #21ace8;
+}
+
+.kg-callout-card-background-green {
+    background: rgba(52, 183, 67, 0.12);
+    border-left: 4px solid #34b743;
+}
+
+.kg-callout-card-background-yellow {
+    background: rgba(255, 230, 55, 0.15);
+    border-left: 4px solid #ffe637;
+}
+
+.kg-callout-card-background-red {
+    background: rgba(255, 99, 71, 0.12);
+    border-left: 4px solid #ff6347;
+}
+
+.kg-callout-card-background-pink {
+    background: rgba(255, 105, 180, 0.12);
+    border-left: 4px solid #ff69b4;
+}
+
+.kg-callout-card-background-purple {
+    background: rgba(128, 0, 128, 0.12);
+    border-left: 4px solid #800080;
+}
+
+.kg-callout-card-background-accent {
+    background: rgba(var(--accent-color-r), var(--accent-color-g), var(--accent-color-b), 0.12);
+    border-left: 4px solid var(--accent-color);
+}
+
+/* ============================================
+   NFT Cards
+   ============================================ */
+.kg-nft-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin: 1.5em auto;
+}
+
+.kg-nft-card-container {
+    position: relative;
+    width: 100%;
+}
+
+.kg-nft-metadata {
+    padding: 2.0rem;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 5px;
+    box-shadow: 0 2px 6px -2px rgba(0, 0, 0, 0.1);
+}
+
+.kg-nft-image {
+    width: 100%;
+    border-radius: 5px 5px 0 0;
+}
+
+.kg-nft-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.0em;
+}
+
+.kg-nft-title {
+    font-size: 1.4em;
+    font-weight: 700;
+    margin: 0;
+    color: #15171A;
+}
+
+.kg-nft-logo {
+    height: 1.8em;
+    width: 1.8em;
+}
+
+.kg-nft-creator {
+    font-size: 0.9em;
+    color: #738a94;
+    margin-bottom: 0.8em;
+}
+
+.kg-nft-description {
+    font-size: 0.9em;
+    line-height: 1.4em;
+    color: #738a94;
+}
+
+/* ============================================
+   Toggle Cards
+   ============================================ */
+.kg-toggle-card {
+    background: transparent;
+    box-shadow: inset 0 0 0 1px rgba(124, 139, 154, 0.25);
+    border-radius: 4px;
+    margin: 1.5em 0;
+}
+
+.kg-toggle-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2em 1.5em;
+    cursor: pointer;
+}
+
+.kg-toggle-heading-text {
+    font-size: 1.05em;
+    font-weight: 600;
+}
+
+.kg-toggle-card-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1em;
+    width: 1.5em;
+    height: 1.5em;
+    margin-left: 1em;
+}
+
+.kg-toggle-content {
+    padding: 0 1.5em 1.5em;
+    display: none;
+}
+
+.kg-toggle-card[open] .kg-toggle-content {
+    display: block;
+}
+
+/* ============================================
+   Audio Cards
+   ============================================ */
+.kg-audio-card {
+    display: flex;
+    width: 100%;
+    box-shadow: 0 2px 6px -2px rgba(0, 0, 0, 0.1), 0 0 1px rgba(0, 0, 0, 0.4);
+    background: #fff;
+    border-radius: 5px;
+    margin: 1.5em 0;
+}
+
+.kg-audio-thumbnail {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    min-width: 80px;
+    height: 80px;
+    background: #f0f0f0;
+    border-radius: 5px 0 0 5px;
+}
+
+.kg-audio-thumbnail.placeholder {
+    background: #f0f0f0;
+    color: #666;
+    font-size: 1.2em;
+}
+
+.kg-audio-player-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    padding: 1em 1.5em 1em 1em;
+}
+
+.kg-audio-title {
+    font-size: 1.1em;
+    font-weight: 700;
+    line-height: 1.15em;
+    margin: 0 0 0.5em;
+}
+
+.kg-audio-player {
+    display: none;
+}
+
+.kg-audio-current-time,
+.kg-audio-time,
+.kg-audio-duration {
+    font-size: 0.85em;
+    color: #738a94;
+}
+
+.kg-audio-play-icon,
+.kg-audio-pause-icon {
+    cursor: pointer;
+    font-size: 1.1em;
+    padding: 0.5em;
+    border: none;
+    background: transparent;
+}
+
+.kg-audio-seek-slider,
+.kg-audio-volume-slider {
+    appearance: none;
+    height: 4px;
+    background: #e5eff5;
+    border: none;
+    border-radius: 2px;
+}
+
+.kg-audio-playback-rate {
+    background: none;
+    border: none;
+    font-size: 0.85em;
+    cursor: pointer;
+    color: #738a94;
+}
+
+.kg-audio-mute-icon,
+.kg-audio-unmute-icon {
+    cursor: pointer;
+    font-size: 1em;
+    padding: 0.5em;
+    border: none;
+    background: transparent;
+}
+
+/* ============================================
+   Video Cards  
+   ============================================ */
+.kg-video-card {
+    position: relative;
+    width: 100%;
+    margin: 1.5em 0;
+}
+
+.kg-video-overlay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 999;
+}
+
+.kg-video-hide {
+    display: none !important;
+}
+
+.kg-video-container {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+}
+
+.kg-video-thumbnail {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.kg-video-thumbnail.placeholder {
+    background: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+    color: #666;
+    font-size: 1.2em;
+}
+
+.kg-video-player-container {
+    position: relative;
+    width: 100%;
+}
+
+.kg-video-title {
+    font-size: 1.1em;
+    font-weight: 700;
+    margin: 0.5em 0;
+}
+
+.kg-video-player {
+    width: 100%;
+    height: auto;
+}
+
+.kg-video-current-time,
+.kg-video-time,
+.kg-video-duration {
+    font-size: 0.85em;
+    color: #738a94;
+}
+
+.kg-video-play-icon,
+.kg-video-pause-icon {
+    cursor: pointer;
+    font-size: 2em;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.6);
+    border: none;
+    border-radius: 50%;
+    padding: 0.5em;
+}
+
+.kg-video-large-play-icon {
+    cursor: pointer;
+    font-size: 3em;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.7);
+    border: none;
+    border-radius: 50%;
+    padding: 0.5em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+}
+
+.kg-video-seek-slider,
+.kg-video-volume-slider {
+    appearance: none;
+    height: 4px;
+    background: #e5eff5;
+    border: none;
+    border-radius: 2px;
+}
+
+.kg-video-playback-rate {
+    background: none;
+    border: none;
+    font-size: 0.85em;
+    cursor: pointer;
+    color: #738a94;
+}
+
+.kg-video-mute-icon,
+.kg-video-unmute-icon {
+    cursor: pointer;
+    font-size: 1em;
+    padding: 0.5em;
+    border: none;
+    background: transparent;
+}
+
+/* ============================================
+   Button Cards
+   ============================================ */
+.kg-button-card {
+    display: flex;
+    position: static;
+    align-items: center;
+    width: 100%;
+    margin: 1.5em 0;
+}
+
+.kg-button-card.kg-align-left {
+    justify-content: flex-start;
+}
+
+.kg-button-card.kg-align-center {
+    justify-content: center;
+}
+
+.kg-btn {
+    display: inline-block;
+    padding: 12px 24px;
+    background: var(--accent-color, #15171A);
+    color: #fff;
+    font-size: 0.95em;
+    font-weight: 600;
+    line-height: 1em;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: all 0.2s ease;
+}
+
+.kg-btn:hover {
+    opacity: 0.85;
+}
+
+.kg-btn-accent {
+    background: var(--accent-color, #15171A);
+}
+
+/* ============================================
+   Product Cards
+   ============================================ */
+.kg-product-card {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 100%;
+    margin: 1.5em 0;
+}
+
+.kg-product-card-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 1.5em;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 6px -2px rgba(0, 0, 0, 0.1), 0 0 1px rgba(0, 0, 0, 0.4);
+}
+
+.kg-product-card-image {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 1em;
+}
+
+.kg-product-card-title-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.75em;
+}
+
+.kg-product-card-title {
+    font-size: 1.3em;
+    font-weight: 700;
+    line-height: 1.15em;
+    margin: 0;
+}
+
+.kg-product-card-rating {
+    display: flex;
+    align-items: center;
+    margin-left: 1em;
+}
+
+.kg-product-card-rating-star {
+    height: 20px;
+    width: 20px;
+    color: #e5eff5;
+    margin-right: 2px;
+}
+
+.kg-product-card-rating-star.kg-product-card-rating-active {
+    color: var(--accent-color, #15171A);
+}
+
+.kg-product-card-description {
+    font-size: 0.95em;
+    line-height: 1.5em;
+    margin-bottom: 1.5em;
+    color: #738a94;
+}
+
+.kg-product-card-button {
+    display: inline-block;
+    padding: 12px 24px;
+    background: var(--accent-color, #15171A);
+    color: #fff;
+    font-size: 0.95em;
+    font-weight: 600;
+    line-height: 1em;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: all 0.2s ease;
+}
+
+.kg-product-card-btn-accent {
+    background: var(--accent-color, #15171A);
+}
+
+/* ============================================
+   Before/After Cards
+   ============================================ */
+.kg-before-after-card {
+    position: relative;
+    width: 100%;
+    margin: 1.5em 0;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.kg-before-after-card-image-before,
+.kg-before-after-card-image-after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+}
+
+.kg-before-after-card-image-after {
+    clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%);
+}
+
+/* ============================================
+   File Cards
+   ============================================ */
+.kg-file-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2em;
+    min-height: 80px;
+    background: #f7f8f9;
+    border-radius: 5px;
+    margin: 1.5em 0;
+}
+
+.kg-file-card-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+}
+
+.kg-file-card-contents {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 4px 8px;
+    height: 100%;
+}
+
+.kg-file-card-title {
+    font-size: 1em;
+    font-weight: 600;
+    line-height: 1.3em;
+}
+
+.kg-file-card-caption {
+    font-size: 0.9em;
+    line-height: 1.3em;
+    color: #738a94;
+    margin-top: 2px;
+}
+
+.kg-file-card-filename {
+    display: flex;
+    color: #738a94;
+    font-size: 0.9em;
+    font-weight: 500;
+    line-height: 1.3em;
+    margin-top: 8px;
+}
+
+.kg-file-card-filesize {
+    display: inline;
+    font-size: 0.9em;
+    line-height: 1.3em;
+    margin-left: 6px;
+}
+
+.kg-file-card-medium {
+    min-height: 140px;
+}
+
+.kg-file-card-small {
+    min-height: 100px;
+}
+
+/* ============================================
+   Blockquote Alt
+   ============================================ */
+.kg-blockquote-alt {
+    font-style: italic;
+    font-weight: 400;
+    text-align: center;
+    color: #738a94;
+    background: #f7f8f9;
+    padding: 1.5em 2em;
+    border-radius: 3px;
+    border-left: 4px solid var(--accent-color, #15171A);
+    margin: 1.5em 0;
+}

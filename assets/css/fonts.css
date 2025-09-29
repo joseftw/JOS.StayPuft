@@ -1,3 +1,4 @@
+/* Custom Fonts */
 @font-face {
   font-family: 'josefottossonse';
   src:
@@ -6,7 +7,22 @@
     url('../css/fonts/josefottossonse.svg?4bsxzx#josefottossonse') format('svg');
   font-weight: normal;
   font-style: normal;
-  font-display: block;
+  font-display: swap;
+}
+
+/* Custom font family is available for use */
+.custom-font {
+    font-family: 'josefottossonse', sans-serif;
+}
+
+/* Use custom fonts for headings */
+h1.custom-font,
+h2.custom-font,
+h3.custom-font,
+h4.custom-font,
+h5.custom-font,
+h6.custom-font {
+    font-family: 'josefottossonse', sans-serif;
 }
 
 .fa {
