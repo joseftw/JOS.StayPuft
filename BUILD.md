@@ -75,18 +75,30 @@ The build process uses **industry-standard tools**:
 - File watching for development (native!)
 - Archive packaging for theme distribution (native!)
 
-## Archive Formats
+## Performance Optimizations
 
-The build system creates theme packages in multiple formats:
-- **`.tar.gz`**: Primary format using native `tar` command
-- **`.zip`**: When system `zip` command is available
-- All formats are compatible with Ghost theme installation
+### CSS Optimization
+The build system now properly combines CSS files for optimal performance:
+- **Main CSS bundle**: `staypuft.css` (combines global.css, fonts.css, koenig.css, screen.css)
+- **Standalone CSS**: `prism.css` (syntax highlighting, loaded separately)
 
-## Why Rollup?
+**Size improvements**: 52.5% reduction (133KB → 63KB) by eliminating duplicate imports.
 
-Rollup was chosen over custom solutions because:
-- **Designed for libraries/themes**: Perfect for this use case
-- **Better than Webpack**: Simpler configuration, smaller bundles
-- **Industry standard**: Used by major projects, well-maintained
-- **Excellent minification**: Superior compression compared to custom terser usage
-- **Reliable**: Mature, stable, and actively developed
+### JavaScript Bundling Options
+The build system provides both approaches:
+
+**Option 1: Individual files** (current template setup)
+- `infinitescroll.js` (1KB) - Infinite scroll functionality
+- `prism.js` (13KB) - Syntax highlighting
+
+**Option 2: Combined bundle** (better performance)
+- `theme.js` (14KB) - Combines both scripts into one file
+
+To use the combined bundle, update your templates to replace:
+```handlebars
+<script defer async src="{{asset "built/infinitescroll.js"}}"></script>
+```
+with:
+```handlebars
+<script defer async src="{{asset "built/theme.js"}}"></script>
+```

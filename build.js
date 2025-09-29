@@ -46,35 +46,63 @@ const processor = postcss([
 
 /**
  * Process CSS files using PostCSS
+ * Process only the main CSS file (staypuft.css) which imports all others
  */
 async function processCSS() {
     console.log('🎨 Processing CSS files...');
     
     try {
-        const cssFiles = fs.readdirSync(CSS_DIR).filter(file => file.endsWith('.css'));
+        // Process only the main CSS file - staypuft.css imports all others
+        const mainCssFile = 'staypuft.css';
+        const inputPath = path.join(CSS_DIR, mainCssFile);
+        const outputPath = path.join(BUILT_DIR, mainCssFile);
+        const mapPath = outputPath + '.map';
         
-        for (const file of cssFiles) {
+        const css = fs.readFileSync(inputPath, 'utf8');
+        
+        const result = await processor.process(css, {
+            from: inputPath,
+            to: outputPath,
+            map: { inline: false, annotation: false }
+        });
+        
+        // Write CSS file
+        fs.writeFileSync(outputPath, result.css);
+        
+        // Write source map
+        if (result.map) {
+            fs.writeFileSync(mapPath, result.map.toString());
+        }
+        
+        console.log(`  ✅ ${mainCssFile} -> built/${mainCssFile} (includes all imports)`);
+        
+        // Also process standalone files that aren't imported by the main file
+        const standaloneFiles = ['prism.css']; // Add others if needed
+        
+        for (const file of standaloneFiles) {
             const inputPath = path.join(CSS_DIR, file);
             const outputPath = path.join(BUILT_DIR, file);
             const mapPath = outputPath + '.map';
             
-            const css = fs.readFileSync(inputPath, 'utf8');
-            
-            const result = await processor.process(css, {
-                from: inputPath,
-                to: outputPath,
-                map: { inline: false, annotation: false }
-            });
-            
-            // Write CSS file
-            fs.writeFileSync(outputPath, result.css);
-            
-            // Write source map
-            if (result.map) {
-                fs.writeFileSync(mapPath, result.map.toString());
+            if (fs.existsSync(inputPath)) {
+                const css = fs.readFileSync(inputPath, 'utf8');
+                
+                const result = await processor.process(css, {
+                    from: inputPath,
+                    to: outputPath,
+                    map: { inline: false, annotation: false }
+                });
+                
+                // Write CSS file
+                fs.writeFileSync(outputPath, result.css);
+                
+                // Write source map
+                if (result.map) {
+                    fs.writeFileSync(mapPath, result.map.toString());
+                }
+                
+                console.log(`  ✅ ${file} -> built/${file}`);
             }
-            
-            console.log(`  ✅ ${file} -> built/${file}`);
         }
     } catch (error) {
         console.error('❌ CSS processing error:', error.message);
