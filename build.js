@@ -186,10 +186,10 @@ async function createZip() {
     }
     
     const packageJson = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
-    const zipName = `${packageJson.name}.zip`;
+    const zipName = `${packageJson.name}.${packageJson.version}.zip`;
     const zipPath = path.join(DIST_DIR, zipName);
     
-    const tarPath = path.join(DIST_DIR, `${packageJson.name}.tar.gz`);
+    const tarPath = path.join(DIST_DIR, `${packageJson.name}.${packageJson.version}.tar.gz`);
     
     try {
         const { execSync } = require('child_process');
@@ -210,7 +210,7 @@ async function createZip() {
         });
         
         const stats = fs.statSync(tarPath);
-        console.log(`  ✅ Created ${packageJson.name}.tar.gz (${stats.size} bytes)`);
+        console.log(`  ✅ Created ${packageJson.name}.${packageJson.version}.tar.gz (${stats.size} bytes)`);
         
         // Also try to create zip if command available
         try {
@@ -220,7 +220,7 @@ async function createZip() {
             });
             
             const zipStats = fs.statSync(zipPath);
-            console.log(`  ✅ Created ${packageJson.name}.zip (${zipStats.size} bytes)`);
+            console.log(`  ✅ Created ${packageJson.name}.${packageJson.version}.zip (${zipStats.size} bytes)`);
         } catch (zipError) {
             console.log('  ℹ️  System zip not available, tar.gz created instead');
         }
