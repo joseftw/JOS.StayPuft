@@ -1,33 +1,5 @@
 import { defineConfig } from 'rollup';
 import terser from '@rollup/plugin-terser';
-import postcss from 'rollup-plugin-postcss';
-
-// PostCSS plugins
-import autoprefixer from 'autoprefixer';
-import colorFunction from 'postcss-color-function';
-import cssnano from 'cssnano';
-import customProperties from 'postcss-custom-properties';
-import easyimport from 'postcss-easy-import';
-
-// Configuration for different asset types
-const postcssConfig = {
-  extract: false, // We'll handle extraction manually
-  minimize: true,
-  sourceMap: true,
-  plugins: [
-    easyimport,
-    customProperties({
-      preserve: false
-    }),
-    colorFunction(),
-    autoprefixer({
-      overrideBrowserslist: ['last 2 versions']
-    }),
-    cssnano({
-      preset: 'default'
-    })
-  ]
-};
 
 export default defineConfig([
   // JavaScript processing
