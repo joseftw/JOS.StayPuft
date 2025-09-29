@@ -10,6 +10,10 @@
     <title>{{meta_title}}</title>
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    {{!-- Preload critical font for faster rendering --}}
+    <link rel="preload" href="{{asset "css/fonts/josefottossonse.woff2"}}" as="font" type="font/woff2" crossorigin>
+    
     {{!-- Styles'n'Scripts --}}
     {{!-- Combined theme CSS (includes all styles and syntax highlighting) --}}
     <link rel="preload" href="{{asset "built/theme.css"}}" as="style" onload="this.onload=null;this.rel='stylesheet'">

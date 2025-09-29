@@ -233,6 +233,7 @@ body {
     overflow-y: hidden;
     height: 40px;
     font-size: 1.2rem;
+    contain: layout;
 }
 
 .site-nav-left {
@@ -426,6 +427,7 @@ The knock-on effect of this is ugly browser-scroll bars at the bottom, so 80px o
     border-radius: 5px;
     box-shadow: rgba(39,44,49,0.06) 8px 14px 38px, rgba(39, 44, 49, 0.03) 1px 3px 8px;
     transition: all 0.5s ease;
+    contain: layout style;
 }
 
 .post-card-content {
@@ -441,12 +443,14 @@ The knock-on effect of this is ugly browser-scroll bars at the bottom, so 80px o
     transform: translate3D(0, -1px, 0) scale(1.02);
 }
 
+/* Prevent layout shifts from dynamic sizing */
 .post-card-image-link {
     position: relative;
     display: block;
     overflow: hidden;
     border-radius: 5px 5px 0 0;
     aspect-ratio: 16 / 9;
+    width: 100%;
 }
 
 .post-card-image {
