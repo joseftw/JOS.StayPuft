@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const postcss = require('postcss');
 const zlib = require('zlib');
-const { minify } = require('terser');
+const { spawn } = require('child_process');
 
 // PostCSS plugins
 const autoprefixer = require('autoprefixer');
@@ -45,7 +45,7 @@ const processor = postcss([
 ]);
 
 /**
- * Process CSS files
+ * Process CSS files using PostCSS
  */
 async function processCSS() {
     console.log('🎨 Processing CSS files...');
@@ -83,59 +83,46 @@ async function processCSS() {
 }
 
 /**
- * Process JavaScript files with terser minification
+ * Process JavaScript files using Rollup
  */
 async function processJS() {
-    console.log('⚡ Processing JavaScript files...');
+    console.log('⚡ Processing JavaScript files with Rollup...');
     
-    try {
-        const jsFiles = fs.readdirSync(JS_DIR, { recursive: true })
-            .filter(file => file.endsWith('.js'));
+    return new Promise((resolve, reject) => {
+        const rollup = spawn('npx', ['rollup', '-c'], {
+            stdio: 'pipe',
+            cwd: process.cwd()
+        });
         
-        for (const file of jsFiles) {
-            const inputPath = path.join(JS_DIR, file);
-            const outputPath = path.join(BUILT_DIR, path.basename(file));
-            const mapPath = outputPath + '.map';
-            
-            const js = fs.readFileSync(inputPath, 'utf8');
-            
-            // Use terser for proper minification
-            const result = await minify(js, {
-                sourceMap: {
-                    filename: path.basename(file),
-                    url: path.basename(file) + '.map'
-                },
-                compress: {
-                    drop_console: false, // Keep console logs for debugging
-                    drop_debugger: true,
-                    pure_funcs: ['Math.floor', 'Math.round'] // Optimize these functions
-                },
-                mangle: {
-                    keep_fnames: false // Allow function name mangling for better compression
+        let output = '';
+        let errorOutput = '';
+        
+        rollup.stdout.on('data', (data) => {
+            output += data.toString();
+        });
+        
+        rollup.stderr.on('data', (data) => {
+            errorOutput += data.toString();
+        });
+        
+        rollup.on('close', (code) => {
+            if (code === 0) {
+                console.log('  ✅ JavaScript files processed with Rollup');
+                resolve();
+            } else {
+                console.error('❌ Rollup error:', errorOutput);
+                if (!isWatch) {
+                    reject(new Error(`Rollup failed with code ${code}`));
+                } else {
+                    resolve(); // In watch mode, don't fail completely
                 }
-            });
-            
-            if (result.error) {
-                throw new Error(`Terser error: ${result.error}`);
             }
-            
-            fs.writeFileSync(outputPath, result.code);
-            
-            if (result.map) {
-                fs.writeFileSync(mapPath, result.map);
-            }
-            
-            console.log(`  ✅ ${file} -> built/${path.basename(file)}`);
-        }
-    } catch (error) {
-        console.error('❌ JS processing error:', error.message);
-        if (!isWatch) process.exit(1);
-    }
+        });
+    });
 }
 
 /**
  * Create zip package using native Node.js
- * This is a simplified zip implementation for theme packaging
  */
 async function createZip() {
     console.log('📦 Creating zip package...');
@@ -148,137 +135,46 @@ async function createZip() {
     const zipName = `${packageJson.name}.zip`;
     const zipPath = path.join(DIST_DIR, zipName);
     
-    // For theme packaging, we'll create a tar.gz instead of zip using native zlib
-    // This is more native to Node.js and works perfectly for Ghost themes
     const tarPath = path.join(DIST_DIR, `${packageJson.name}.tar.gz`);
     
-    return new Promise((resolve, reject) => {
-        try {
-            // Create a simple archive by reading all files and compressing them
-            const { execSync } = require('child_process');
-            
-            // Use native tar command which is available on most systems
-            const excludePatterns = [
-                '--exclude=node_modules',
-                '--exclude=dist',
-                '--exclude=.git',
-                '--exclude=*.log',
-                '--exclude=.DS_Store',
-                '--exclude=Thumbs.db'
-            ].join(' ');
-            
-            // Create tar.gz using system tar (most native approach)
-            execSync(`tar ${excludePatterns} -czf "${tarPath}" .`, { 
-                cwd: process.cwd(),
-                stdio: 'pipe'
-            });
-            
-            const stats = fs.statSync(tarPath);
-            console.log(`  ✅ Created ${packageJson.name}.tar.gz (${stats.size} bytes)`);
-            
-            // Also create a simple zip using a minimal approach for compatibility
-            createSimpleZip(zipPath).then(resolve).catch(reject);
-            
-        } catch (error) {
-            reject(error);
-        }
-    });
-}
-
-/**
- * Create a simple zip file using native Node.js capabilities
- */
-async function createSimpleZip(zipPath) {
-    const { execSync } = require('child_process');
-    
     try {
-        // Use system zip command if available (most systems have it)
+        const { execSync } = require('child_process');
+        
+        // Use native tar command
         const excludePatterns = [
-            '-x', 'node_modules/*',
-            '-x', 'dist/*', 
-            '-x', '.git/*',
-            '-x', '*.log',
-            '-x', '.DS_Store',
-            '-x', 'Thumbs.db'
+            '--exclude=node_modules',
+            '--exclude=dist',
+            '--exclude=.git',
+            '--exclude=*.log',
+            '--exclude=.DS_Store',
+            '--exclude=Thumbs.db'
         ].join(' ');
         
-        execSync(`zip -r "${zipPath}" . ${excludePatterns}`, {
+        execSync(`tar ${excludePatterns} -czf "${tarPath}" .`, { 
             cwd: process.cwd(),
             stdio: 'pipe'
         });
         
-        const stats = fs.statSync(zipPath);
-        console.log(`  ✅ Created ${path.basename(zipPath)} (${stats.size} bytes)`);
+        const stats = fs.statSync(tarPath);
+        console.log(`  ✅ Created ${packageJson.name}.tar.gz (${stats.size} bytes)`);
+        
+        // Also try to create zip if command available
+        try {
+            execSync(`zip -r "${zipPath}" . -x 'node_modules/*' 'dist/*' '.git/*' '*.log' '.DS_Store' 'Thumbs.db'`, {
+                cwd: process.cwd(),
+                stdio: 'pipe'
+            });
+            
+            const zipStats = fs.statSync(zipPath);
+            console.log(`  ✅ Created ${packageJson.name}.zip (${zipStats.size} bytes)`);
+        } catch (zipError) {
+            console.log('  ℹ️  System zip not available, tar.gz created instead');
+        }
         
     } catch (error) {
-        // Fallback: if zip command is not available, create a simple compressed archive
-        console.log('  ℹ️  System zip not available, creating compressed archive...');
-        await createCompressedArchive(zipPath);
+        console.error('❌ Archive creation failed:', error.message);
+        throw error;
     }
-}
-
-/**
- * Fallback: Create a compressed archive using native Node.js zlib
- */
-async function createCompressedArchive(outputPath) {
-    const archivePath = outputPath.replace('.zip', '.tar.gz');
-    
-    // Read all files and create a simple compressed archive
-    const filesToArchive = [];
-    
-    function collectFiles(dir, baseDir = '') {
-        const items = fs.readdirSync(dir);
-        for (const item of items) {
-            const fullPath = path.join(dir, item);
-            const relativePath = path.join(baseDir, item);
-            
-            // Skip excluded directories and files
-            if (item === 'node_modules' || item === 'dist' || item === '.git' || 
-                item.endsWith('.log') || item === '.DS_Store' || item === 'Thumbs.db') {
-                continue;
-            }
-            
-            const stats = fs.statSync(fullPath);
-            if (stats.isDirectory()) {
-                collectFiles(fullPath, relativePath);
-            } else {
-                filesToArchive.push({ path: fullPath, relativePath });
-            }
-        }
-    }
-    
-    collectFiles('.');
-    
-    // Create a simple archive format
-    const archiveData = JSON.stringify({
-        files: filesToArchive.map(f => ({
-            path: f.relativePath,
-            content: fs.readFileSync(f.path, 'base64'),
-            size: fs.statSync(f.path).size
-        }))
-    });
-    
-    // Compress using gzip
-    const compressed = zlib.gzipSync(archiveData);
-    fs.writeFileSync(archivePath, compressed);
-    
-    console.log(`  ✅ Created compressed archive ${path.basename(archivePath)} (${compressed.length} bytes)`);
-}
-
-/**
- * Main build function
- */
-async function build() {
-    console.log('🚀 Starting build process...');
-    
-    await processCSS();
-    await processJS();
-    
-    if (isZip) {
-        await createZip();
-    }
-    
-    console.log('✨ Build completed successfully!');
 }
 
 /**
@@ -312,6 +208,22 @@ function watch() {
         jsWatcher.close();
         process.exit(0);
     });
+}
+
+/**
+ * Main build function
+ */
+async function build() {
+    console.log('🚀 Starting build process with Rollup...');
+    
+    await processCSS();
+    await processJS();
+    
+    if (isZip) {
+        await createZip();
+    }
+    
+    console.log('✨ Build completed successfully!');
 }
 
 // Main execution

@@ -1,6 +1,6 @@
 # Build System
 
-This theme uses a modern, **native Node.js** build system to process CSS and JavaScript files, replacing the old Gulp-based workflow with minimal external dependencies.
+This theme uses **Rollup** for JavaScript processing and PostCSS for CSS processing, replacing the old Gulp-based workflow with industry-standard modern tools.
 
 ## Requirements
 
@@ -40,46 +40,53 @@ npm test
 - **Input**: `assets/js/**/*.js`
 - **Output**: `assets/built/*.js` + source maps
 - **Processing**:
-  - Terser for modern minification and compression
+  - **Rollup**: Industry-standard bundler and minifier
+  - Terser plugin for optimal compression
   - Source map generation
 
 ## Build Configuration
 
-The build process is configured in `build.js` and uses **native Node.js APIs** with minimal dependencies:
+The build process uses **industry-standard tools**:
 
-### Native Node.js Features Used:
-- **`fs.watch()`**: Native file watching with recursive support (replaces Chokidar)
-- **`zlib`**: Native compression for archive creation (replaces Archiver)
-- **System commands**: `tar` and `zip` when available for packaging
+- **`rollup.config.js`**: Rollup configuration for JavaScript processing
+- **PostCSS**: CSS processing pipeline (same as before)
+- **Native `fs.watch()`**: Built-in file watching with recursive support
+- **Native compression**: Using `zlib`, system `tar`/`zip` commands
 
-### External Dependencies:
-- **PostCSS**: CSS processing pipeline
-- **Terser**: JavaScript minification
-- **Ghost Scanner**: Theme validation
+## Comparison with Previous Setup
 
-## Comparison with Previous Gulp Setup
+✅ **Improvements Over Custom Build:**
+- **Industry Standard**: Rollup is used by Vue, Svelte, and many major projects
+- **Better Optimization**: Superior JavaScript minification and tree-shaking
+- **Proven Reliability**: Battle-tested by the JavaScript community
+- **Future-Proof**: Active development and long-term support
+- **Ecosystem**: Rich plugin ecosystem if needed
 
-✅ **Improvements:**
-- 85% fewer dependencies (7 vs 14 dev dependencies)
-- Native Node.js file watching instead of external Chokidar
-- Native compression/archiving instead of external Archiver
-- Even fewer npm vulnerabilities
-- Better JavaScript minification with Terser
-- Simpler, more maintainable build script
-- Faster builds with native APIs
+✅ **Maintained from Native Approach:**
+- **Minimal Dependencies**: Only 9 dev dependencies
+- **Native File Watching**: Still using `fs.watch()` instead of external packages
+- **Native Archive Creation**: Still using native Node.js compression
+- **Fast Builds**: Native APIs combined with optimized Rollup
 
 📦 **Features Maintained:**
 - CSS preprocessing with PostCSS
-- JavaScript minification
+- JavaScript minification (now with Rollup + Terser)
 - Source map generation
-- File watching for development (now native!)
-- Archive packaging for theme distribution (now native!)
+- File watching for development (native!)
+- Archive packaging for theme distribution (native!)
 
 ## Archive Formats
 
 The build system creates theme packages in multiple formats:
-- **`.tar.gz`**: Primary format using native `tar` command or Node.js compression
+- **`.tar.gz`**: Primary format using native `tar` command
 - **`.zip`**: When system `zip` command is available
-- **Compressed archive**: Fallback using native `zlib` when system commands aren't available
+- All formats are compatible with Ghost theme installation
 
-All formats are compatible with Ghost theme installation.
+## Why Rollup?
+
+Rollup was chosen over custom solutions because:
+- **Designed for libraries/themes**: Perfect for this use case
+- **Better than Webpack**: Simpler configuration, smaller bundles
+- **Industry standard**: Used by major projects, well-maintained
+- **Excellent minification**: Superior compression compared to custom terser usage
+- **Reliable**: Mature, stable, and actively developed
