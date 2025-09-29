@@ -13,8 +13,8 @@
         "build": "node build.js",
         "zip": "node build.js --zip",
         "test": "gscan .",
-        "preship": "yarn test",
-        "ship": "STATUS=$(git status --porcelain); echo $STATUS; if [ -z \"$STATUS\" ]; then yarn version && git push --follow-tags; fi"
+        "preship": "npm test",
+        "ship": "STATUS=$(git status --porcelain); echo $STATUS; if [ -z \"$STATUS\" ]; then npm version patch && git push --follow-tags; fi"
     },
     "author": {
         "name": "Josef Ottosson",
