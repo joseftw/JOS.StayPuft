@@ -11,6 +11,22 @@
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
+    {{!-- Critical sidebar styles to prevent CLS on desktop --}}
+    <style>
+          @media (min-width: 1280px) {
+            #sidebar {
+                position: fixed;
+                width: 320px;
+                height: 100%;
+            }
+
+            #site-main {
+                position: absolute;
+                left: 320px;
+            }
+          }
+    </style>
+    
     {{!-- Preload critical font for faster rendering --}}
     <link rel="preload" href="{{asset "css/fonts/josefottossonse.woff2"}}" as="font" type="font/woff2" crossorigin>
     

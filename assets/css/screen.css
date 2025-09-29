@@ -121,19 +121,6 @@ body {
     }
 }
 
-@media (min-width: 1280px) {
-    #sidebar {
-        position: fixed;
-        width: 320px;
-        height: 100%;
-    }
-
-    #site-main {
-        position: absolute;
-        left: 320px;
-    }
-}
-
 
 /* 4. Site Header
 /* ---------------------------------------------------------- */
@@ -233,7 +220,6 @@ body {
     overflow-y: hidden;
     height: 40px;
     font-size: 1.2rem;
-    contain: layout;
 }
 
 .site-nav-left {
@@ -409,25 +395,24 @@ The knock-on effect of this is ugly browser-scroll bars at the bottom, so 80px o
 
 .post-feed {
     position: relative;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 40px 40px;
+    display: flex;
+    flex-wrap: wrap;
     margin: 0 -20px;
-    padding: 40px 20px 0 20px;
+    padding: 40px 0 0 0;
 }
 
 .post-card {
+    flex: 1 1 300px;
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    margin: 0;
+    margin: 0 20px 40px;
     min-height: 300px;
     background: #fff center center;
     background-size: cover;
     border-radius: 5px;
     box-shadow: rgba(39,44,49,0.06) 8px 14px 38px, rgba(39, 44, 49, 0.03) 1px 3px 8px;
     transition: all 0.5s ease;
-    contain: layout style;
 }
 
 .post-card-content {
@@ -450,7 +435,6 @@ The knock-on effect of this is ugly browser-scroll bars at the bottom, so 80px o
     overflow: hidden;
     border-radius: 5px 5px 0 0;
     aspect-ratio: 16 / 9;
-    width: 100%;
 }
 
 .post-card-image {
@@ -646,16 +630,14 @@ make sure this only happens on large viewports / desktop-ish devices.
 
 @media (min-width: 795px) {
     .post-card-large {
-        grid-column: 1 / -1;
+        flex: 1 1 100%;
         flex-direction: row;
-        min-height: 280px;
     }
 
     .post-card-large .post-card-image-link {
         position: relative;
         flex: 1 1 auto;
         border-radius: 5px 0 0 5px;
-        aspect-ratio: 16 / 10;
     }
 
     .post-card-large .post-card-image {
@@ -694,13 +676,10 @@ make sure this only happens on large viewports / desktop-ish devices.
 /* Adjust some margins for smaller screens */
 @media (max-width: 650px) {
     .post-feed {
-        padding: 5vw 20px 0 20px;
-        grid-template-columns: 1fr;
-        gap: 5vw;
+        padding-top: 5vw;
     }
-    
     .post-card {
-        margin: 0;
+        margin: 0 20px 5vw;
     }
 }
 
