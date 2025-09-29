@@ -71,16 +71,7 @@ body {
 /* 2. Layout - Page building blocks
 /* ---------------------------------------------------------- */
 
-.site-wrapper {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
-
-.site-main {
-    z-index: 100;
-    flex-grow: 1;
-}
+/* Site wrapper and main styles moved to inline critical CSS */
 
 /* Full width page blocks */
 .outer {
@@ -393,33 +384,12 @@ The knock-on effect of this is ugly browser-scroll bars at the bottom, so 80px o
 /* 6. Post Feed
 /* ---------------------------------------------------------- */
 
-.post-feed {
-    position: relative;
-    display: flex;
-    flex-wrap: wrap;
-    margin: 0 -20px;
-    padding: 40px 0 0 0;
-}
+/* Post feed and card core layout moved to inline critical CSS */
 
+/* Post card visual enhancements (non-critical) */
 .post-card {
-    flex: 1 1 300px;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    margin: 0 20px 40px;
-    min-height: 300px;
-    background: #fff center center;
-    background-size: cover;
-    border-radius: 5px;
     box-shadow: rgba(39,44,49,0.06) 8px 14px 38px, rgba(39, 44, 49, 0.03) 1px 3px 8px;
     transition: all 0.5s ease;
-}
-
-.post-card-content {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
 }
 
 .post-card:hover {
@@ -428,21 +398,7 @@ The knock-on effect of this is ugly browser-scroll bars at the bottom, so 80px o
     transform: translate3D(0, -1px, 0) scale(1.02);
 }
 
-/* Prevent layout shifts from dynamic sizing */
-.post-card-image-link {
-    position: relative;
-    display: block;
-    overflow: hidden;
-    border-radius: 5px 5px 0 0;
-    aspect-ratio: 16 / 9;
-}
-
-.post-card-image {
-    width: 100%;
-    height: 100%;
-    background: var(--lightgrey) no-repeat center center;
-    object-fit: cover;
-}
+/* Image link and image styles moved to inline critical CSS */
 
 .post-card-content-link {
     position: relative;
