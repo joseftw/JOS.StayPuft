@@ -111,12 +111,8 @@
 
     {{> "subscribe-overlay"}}
 
-    {{!-- Prism --}}
-    <script defer async type="text/javascript" src="{{asset "js/prism/prism.js"}}"></script>
-
-    {{#if pagination.pages}}
-    <script defer async src="{{asset "built/infinitescroll.js"}}"></script>
-    {{/if}}
+    {{!-- Theme JavaScript Bundle (includes Prism syntax highlighting and infinite scroll) --}}
+    <script defer async src="{{asset "built/theme.js"}}"></script>
 
     {{!-- The #block helper will pull in data from the #contentFor other template files. In this case, there's some JavaScript which we only want to use in post.hbs, but it needs to be included down here, after jQuery has already loaded. --}}
     {{{block "scripts"}}}

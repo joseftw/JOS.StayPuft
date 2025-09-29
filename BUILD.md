@@ -84,21 +84,27 @@ The build system now properly combines CSS files for optimal performance:
 
 **Size improvements**: 52.5% reduction (133KB → 63KB) by eliminating duplicate imports.
 
-### JavaScript Bundling Options
-The build system provides both approaches:
+### JavaScript Bundling (Default)
+The build system uses a **combined JavaScript bundle** for optimal HTTP/2 and HTTP/3 performance:
 
-**Option 1: Individual files** (current template setup)
+**Default: Combined bundle** `theme.js` (14KB)
+- Combines infinite scroll functionality and syntax highlighting
+- Reduces HTTP requests and protocol overhead
+- Better compression and caching efficiency
+- Optimized for modern HTTP protocols
+
+**Alternative: Individual files** (available if needed)
 - `infinitescroll.js` (1KB) - Infinite scroll functionality
 - `prism.js` (13KB) - Syntax highlighting
 
-**Option 2: Combined bundle** (better performance)
-- `theme.js` (14KB) - Combines both scripts into one file
-
-To use the combined bundle, update your templates to replace:
-```handlebars
-<script defer async src="{{asset "built/infinitescroll.js"}}"></script>
-```
-with:
+The default template setup now uses the combined bundle. For individual file loading, you can replace:
 ```handlebars
 <script defer async src="{{asset "built/theme.js"}}"></script>
+```
+with conditional loading:
+```handlebars
+{{#if pagination.pages}}
+<script defer async src="{{asset "built/infinitescroll.js"}}"></script>
+{{/if}}
+<script defer async src="{{asset "built/prism.js"}}"></script>
 ```
