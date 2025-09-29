@@ -238,6 +238,24 @@
                 left: 320px;
             }
           }
+          
+          /* Critical template-specific styles */
+          @media (min-width: 900px) {
+            .home-template .post-feed,
+            .tag-template .post-feed,
+            .author-template .post-feed {
+              margin-top: -70px;
+              padding-top: 0;
+            }
+            .home-template .site-nav {
+              position: relative;
+              top: -70px;
+            }
+          }
+          
+          .home-template .site-header:after {
+            display: none;
+          }
     </style>
     
     {{!-- Preload critical font for faster rendering --}}
