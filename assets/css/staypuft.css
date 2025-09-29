@@ -51,6 +51,13 @@ a:hover {
     font-family: var(--sans-serif);
 }
 
+/* Use custom font for site title and navigation */
+.site-title,
+.site-nav-logo,
+.site-footer-nav {
+    font-family: 'josefottossonse', var(--sans-serif);
+}
+
 #sidebar, .site-footer {
     background: var(--sidebar-color) no-repeat center center;
     background-size: cover;
