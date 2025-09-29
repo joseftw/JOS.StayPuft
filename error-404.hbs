@@ -62,12 +62,9 @@ It's a good idea to keep this template as minimal as possible in terms of both f
         }
     </style>
     {{!-- Styles'n'Scripts --}}
-    <link rel="preload" href="{{asset "built/staypuft.css"}}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="{{asset "built/staypuft.css"}}"></noscript>
-    <link rel="preload" as="style" href="{{asset "built/fonts.css"}}" >
-    {{!-- Prism --}}
-    <link rel="preload" href="{{asset "built/prism.css"}}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="{{asset "built/prism.css"}}"></noscript>
+    {{!-- Combined theme CSS (includes all styles and syntax highlighting) --}}
+    <link rel="preload" href="{{asset "built/theme.css"}}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="{{asset "built/theme.css"}}"></noscript>
 </head>
 <body class="error-template">
     <div class="site-wrapper">

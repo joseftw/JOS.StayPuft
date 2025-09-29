@@ -61,12 +61,9 @@
             }
     </style>
     {{!-- Styles'n'Scripts --}}
-    <link rel="preload" href="{{asset "built/staypuft.css"}}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="{{asset "built/staypuft.css"}}"></noscript>
-    <link rel="preload" as="style" href="{{asset "built/fonts.css"}}" >
-    {{!-- Prism --}}
-    <link rel="preload" href="{{asset "built/prism.css"}}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="{{asset "built/prism.css"}}"></noscript>
+    {{!-- Combined theme CSS (includes all styles and syntax highlighting) --}}
+    <link rel="preload" href="{{asset "built/theme.css"}}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="{{asset "built/theme.css"}}"></noscript>
 
     {{!-- This tag outputs SEO meta+structured data and other important settings --}}
     {{ghost_head}}

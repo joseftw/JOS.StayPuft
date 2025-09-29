@@ -1,0 +1,5 @@
+/* Theme CSS Bundle - Combines all CSS for optimal loading */
+/* Imports all theme styles and syntax highlighting into one file */
+
+@import "staypuft.css";
+@import "prism.css";

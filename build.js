@@ -46,13 +46,13 @@ const processor = postcss([
 
 /**
  * Process CSS files using PostCSS
- * Process only the main CSS file (staypuft.css) which imports all others
+ * Process main CSS files and create a combined bundle
  */
 async function processCSS() {
     console.log('🎨 Processing CSS files...');
     
     try {
-        // Process only the main CSS file - staypuft.css imports all others
+        // Process the main CSS file - staypuft.css imports all others
         const mainCssFile = 'staypuft.css';
         const inputPath = path.join(CSS_DIR, mainCssFile);
         const outputPath = path.join(BUILT_DIR, mainCssFile);
@@ -76,8 +76,34 @@ async function processCSS() {
         
         console.log(`  ✅ ${mainCssFile} -> built/${mainCssFile} (includes all imports)`);
         
+        // Process the combined theme bundle (includes everything)
+        const bundleCssFile = 'theme-bundle.css';
+        const bundleInputPath = path.join(CSS_DIR, bundleCssFile);
+        const bundleOutputPath = path.join(BUILT_DIR, 'theme.css');
+        const bundleMapPath = bundleOutputPath + '.map';
+        
+        if (fs.existsSync(bundleInputPath)) {
+            const bundleCss = fs.readFileSync(bundleInputPath, 'utf8');
+            
+            const bundleResult = await processor.process(bundleCss, {
+                from: bundleInputPath,
+                to: bundleOutputPath,
+                map: { inline: false, annotation: false }
+            });
+            
+            // Write CSS bundle file
+            fs.writeFileSync(bundleOutputPath, bundleResult.css);
+            
+            // Write source map
+            if (bundleResult.map) {
+                fs.writeFileSync(bundleMapPath, bundleResult.map.toString());
+            }
+            
+            console.log(`  ✅ ${bundleCssFile} -> built/theme.css (complete combined bundle)`);
+        }
+        
         // Also process standalone files that aren't imported by the main file
-        const standaloneFiles = ['prism.css']; // Add others if needed
+        const standaloneFiles = ['prism.css']; // Keep prism separate for backward compatibility
         
         for (const file of standaloneFiles) {
             const inputPath = path.join(CSS_DIR, file);
