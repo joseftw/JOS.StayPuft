@@ -27,3 +27,4 @@ dist/
 partials/custom/nav-external.hbs
 
 assets/built/*
+gulpfile.js
