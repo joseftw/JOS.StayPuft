@@ -23,6 +23,14 @@
     --search-placeholder-color: color(white a(0.5));
     --radius3: 0;
     --radius5: 0;
+    --accent-color: #273c75;
+    --accent-color-r: 39;
+    --accent-color-g: 60;
+    --accent-color-b: 117;
+    
+    /* Ghost font settings variables */
+    --gh-font-heading: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Arial", "Helvetica Neue", sans-serif;
+    --gh-font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Arial", "Helvetica Neue", sans-serif;
 }
 
 /* Overrides
@@ -45,6 +53,13 @@ a:hover {
 .site-header-content .author-meta,
 .subscribe-overlay-description {
     font-family: var(--sans-serif);
+}
+
+/* Use custom font for site title and navigation */
+.site-title,
+.site-nav-logo,
+.site-footer-nav {
+    font-family: 'josefottossonse', var(--sans-serif);
 }
 
 #sidebar, .site-footer {

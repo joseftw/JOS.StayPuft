@@ -6,8 +6,8 @@
             {{#if @labs.subscribers}}<a href="#subscribe"><i class="fa fa-envelope"></i>Subscribe via email</a>{{/if}}
         </nav>
         <nav class="site-footer-external">
-            {{#if @site.facebook}}<a href="{{facebook_url @site.facebook}}" aria-label="Link to Facebook" target="_blank" rel="noopener"><i class="fa fa-facebook-f"></i></a>{{/if}}
-            {{#if @site.twitter}}<a href="{{twitter_url @site.twitter}}" aria-label="Link to Twitter" target="_blank" rel="noopener"><i class="fa fa-twitter"></i></a>{{/if}}
+            {{#if @site.facebook}}<a href="{{social_url type="facebook"}}" aria-label="Link to Facebook" target="_blank" rel="noopener"><i class="fa fa-facebook-f"></i></a>{{/if}}
+            {{#if @site.twitter}}<a href="{{social_url type="twitter"}}" aria-label="Link to Twitter" target="_blank" rel="noopener"><i class="fa fa-twitter"></i></a>{{/if}}
         </nav>
         <nav class="site-footer-text">
             <section class="copyright">&copy; <a href="{{@site.url}}" aria-label="{{@site.title}}">{{@site.title}}</a> {{date format="YYYY"}}</section>

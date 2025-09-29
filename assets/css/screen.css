@@ -30,6 +30,23 @@ production stylesheet in assets/built/screen.css
 /* 1. Global - Set up the things
 /* ---------------------------------------------------------- */
 @import "global.css";
+@import "fonts.css";
+@import "koenig.css";
+
+/* Custom fonts support */
+@font-face {
+    font-family: 'custom';
+    src: url('fonts/josefottossonse.woff2') format('woff2'),
+         url('fonts/josefottossonse.woff') format('woff'),
+         url('fonts/josefottossonse.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+.custom-font-family {
+    font-family: 'custom', sans-serif;
+}
 
 body {
     background: #f4f8fb;
