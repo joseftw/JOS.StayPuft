@@ -6,7 +6,7 @@ Transform your Ghost theme into a blazing-fast static website while keeping the 
 
 ```bash
 # 1. Install dependencies
-npm install --save-dev @11ty/eleventy @tryghost/content-api handlebars moment
+npm install --save-dev @11ty/eleventy @11ty/eleventy-plugin-handlebars @tryghost/content-api handlebars moment
 
 # 2. Create sample data (no Ghost instance needed for testing)
 npm run static:sample
@@ -218,7 +218,7 @@ Easy! The theme works as both static and dynamic. Just deploy to Ghost server.
 
 ### Build fails with "Module not found"
 ```bash
-npm install --save-dev @11ty/eleventy @tryghost/content-api handlebars moment
+npm install --save-dev @11ty/eleventy @11ty/eleventy-plugin-handlebars @tryghost/content-api handlebars moment
 ```
 
 ### No content appears

@@ -48,6 +48,7 @@
     ],
     "devDependencies": {
         "@11ty/eleventy": "^3.1.2",
+        "@11ty/eleventy-plugin-handlebars": "^1.0.0",
         "@rollup/plugin-terser": "^0.4.4",
         "@tryghost/content-api": "^1.12.0",
         "autoprefixer": "^10.4.19",
@@ -62,7 +63,8 @@
         "rollup": "^4.52.3"
     },
     "optionalDependencies": {
-        "@11ty/eleventy": "^2.0.1",
+        "@11ty/eleventy": "^3.0.0",
+        "@11ty/eleventy-plugin-handlebars": "^1.0.0",
         "@tryghost/content-api": "^1.11.21",
         "handlebars": "^4.7.8",
         "moment": "^2.30.1"

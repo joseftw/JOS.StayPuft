@@ -2,12 +2,20 @@ const Handlebars = require('handlebars');
 const moment = require('moment');
 
 module.exports = function(eleventyConfig) {
+  // Add Handlebars plugin support for Eleventy v3.0+
+  // In v3.0, template languages moved to separate plugins
+  try {
+    const handlebarsPlugin = require('@11ty/eleventy-plugin-handlebars');
+    eleventyConfig.addPlugin(handlebarsPlugin);
+  } catch (error) {
+    // Plugin not installed - provide helpful error message
+    console.warn('⚠️  @11ty/eleventy-plugin-handlebars not found.');
+    console.warn('   Install it with: npm install --save-dev @11ty/eleventy-plugin-handlebars');
+  }
+  
   // Copy static assets
   eleventyConfig.addPassthroughCopy("assets/built");
   eleventyConfig.addPassthroughCopy("assets/css/fonts");
-  
-  // Set up Handlebars engine
-  const handlebarsEngine = eleventyConfig.getFilter("handlebars");
   
   // Register Handlebars helpers to match Ghost helpers
   Handlebars.registerHelper('foreach', function(context, options) {

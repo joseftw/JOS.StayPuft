@@ -148,7 +148,7 @@ This document investigates the feasibility of converting the JOS.StayPuft Ghost 
 
 ```bash
 # Install dependencies
-npm install --save-dev @11ty/eleventy @tryghost/content-api
+npm install --save-dev @11ty/eleventy @11ty/eleventy-plugin-handlebars @tryghost/content-api
 ```
 
 #### Phase 2: Data Fetching

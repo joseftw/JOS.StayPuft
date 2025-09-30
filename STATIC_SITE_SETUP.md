@@ -37,7 +37,7 @@ Deploy to Static Hosting
 ### Step 1: Install Additional Dependencies
 
 ```bash
-npm install --save-dev @11ty/eleventy @tryghost/content-api moment handlebars
+npm install --save-dev @11ty/eleventy @11ty/eleventy-plugin-handlebars @tryghost/content-api moment handlebars
 ```
 
 ### Step 2: Configure Environment Variables

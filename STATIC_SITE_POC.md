@@ -9,7 +9,7 @@ If you want to test the static site generation without setting up a Ghost instan
 ### 1. Install Dependencies
 
 ```bash
-npm install --save-dev @11ty/eleventy @tryghost/content-api handlebars moment
+npm install --save-dev @11ty/eleventy @11ty/eleventy-plugin-handlebars @tryghost/content-api handlebars moment
 ```
 
 ### 2. Create Sample Data
@@ -245,7 +245,7 @@ To move from POC to production, consider:
 
 Install the optional dependencies:
 ```bash
-npm install --save-dev @11ty/eleventy @tryghost/content-api handlebars moment
+npm install --save-dev @11ty/eleventy @11ty/eleventy-plugin-handlebars @tryghost/content-api handlebars moment
 ```
 
 ### "No posts found" or empty site

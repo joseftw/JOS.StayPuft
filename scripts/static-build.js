@@ -41,11 +41,12 @@ function runCommand(command, description) {
  * Check if required packages are installed
  */
 function checkDependencies() {
-  const required = ['@11ty/eleventy', '@tryghost/content-api', 'moment'];
+  const required = ['@11ty/eleventy', '@11ty/eleventy-plugin-handlebars', '@tryghost/content-api', 'moment'];
   const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));
   const installed = {
     ...packageJson.dependencies || {},
-    ...packageJson.devDependencies || {}
+    ...packageJson.devDependencies || {},
+    ...packageJson.optionalDependencies || {}
   };
   
   const missing = required.filter(pkg => !installed[pkg]);

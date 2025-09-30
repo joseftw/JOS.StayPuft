@@ -27,7 +27,7 @@ This theme now supports static site generation! You can use Ghost as your CMS ba
 **Quick Start:**
 ```bash
 # Install optional dependencies
-npm install --save-dev @11ty/eleventy @tryghost/content-api handlebars moment
+npm install --save-dev @11ty/eleventy @11ty/eleventy-plugin-handlebars @tryghost/content-api handlebars moment
 
 # Create sample data for testing
 npm run static:sample

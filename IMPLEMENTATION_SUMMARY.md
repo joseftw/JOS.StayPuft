@@ -180,7 +180,7 @@ JOS.StayPuft/
 
 ```bash
 # 1. Install dependencies
-npm install --save-dev @11ty/eleventy @tryghost/content-api handlebars moment
+npm install --save-dev @11ty/eleventy @11ty/eleventy-plugin-handlebars @tryghost/content-api handlebars moment
 
 # 2. Create sample data
 npm run static:sample
