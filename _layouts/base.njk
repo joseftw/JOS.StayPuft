@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if title %}{{ title }} - {% endif %}{{ site.title or "My Blog" }}</title>
+    <link rel="stylesheet" href="/assets/built/theme.css">
+</head>
+<body>
+    <div class="site-wrapper">
+        <header class="site-header">
+            <h1><a href="/">{{ site.title or "My Blog" }}</a></h1>
+            <p>{{ site.description or "A simple blog" }}</p>
+        </header>
+        
+        <main class="site-main">
+            {{ content | safe }}
+        </main>
+        
+        <footer class="site-footer">
+            <p>&copy; 2024 {{ site.title or "My Blog" }}</p>
+        </footer>
+    </div>
+    <script defer async src="/assets/built/theme.js"></script>
+</body>
+</html>

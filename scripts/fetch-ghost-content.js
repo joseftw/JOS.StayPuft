@@ -50,7 +50,7 @@ async function fetchPosts() {
     const posts = await api.posts.browse({
       limit: 'all',
       include: 'tags,authors',
-      formats: ['html']
+      formats: ['html', 'plaintext', 'mobiledoc']
     });
     console.log(`   ✅ Fetched ${posts.length} posts`);
     return posts;

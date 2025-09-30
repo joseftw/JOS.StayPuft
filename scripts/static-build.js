@@ -41,7 +41,7 @@ function runCommand(command, description) {
  * Check if required packages are installed
  */
 function checkDependencies() {
-  const required = ['@11ty/eleventy', '@11ty/eleventy-plugin-handlebars', '@tryghost/content-api', 'moment'];
+  const required = ['@11ty/eleventy', '@tryghost/content-api', 'moment'];
   const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));
   const installed = {
     ...packageJson.dependencies || {},
@@ -72,17 +72,22 @@ async function main() {
     if (!runCommand('node scripts/fetch-ghost-content.js', '📥 Fetching content from Ghost API')) {
       console.error('⚠️  Content fetch failed. Continuing with cached data if available...\n');
     }
+    
+    // Step 2: Convert JSON to Markdown
+    if (!runCommand('node scripts/convert-to-markdown.js', '🔄 Converting Ghost content to Markdown')) {
+      console.error('⚠️  Conversion failed. Continuing with existing markdown if available...\n');
+    }
   } else {
-    console.log('⏭️  Skipping content fetch (using cached data)\n');
+    console.log('⏭️  Skipping content fetch and conversion (using existing markdown)\n');
   }
   
-  // Step 2: Build theme assets (CSS, JS)
+  // Step 3: Build theme assets (CSS, JS)
   if (!runCommand('node build.js', '🎨 Building theme assets (CSS, JS)')) {
     console.error('❌ Asset build failed. Cannot continue.');
     process.exit(1);
   }
   
-  // Step 3: Generate static site with Eleventy
+  // Step 4: Generate static site with Eleventy
   const eleventyCmd = serve ? 'eleventy --serve' : 'eleventy';
   if (!runCommand(`npx ${eleventyCmd}`, serve ? '🌐 Starting Eleventy development server' : '📦 Generating static site with Eleventy')) {
     console.error('❌ Static site generation failed.');
