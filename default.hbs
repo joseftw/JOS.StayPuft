@@ -10,9 +10,223 @@
     <title>{{meta_title}}</title>
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    {{!-- Critical layout styles to prevent CLS --}}
     <style>
-          @media (min-width: 1280px)
-          {
+          /* Critical layout structure */
+          .site-wrapper {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+          }
+          
+          .site-main {
+            z-index: 100;
+            flex-grow: 1;
+          }
+          
+          /* Critical sidebar header structure */
+          .site-header {
+            position: relative;
+            padding-top: 12px;
+            padding-bottom: 12px;
+            color: #fff;
+            margin: 2em 0;
+          }
+          
+          .site-header-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 10vw 4vw;
+            min-height: 200px;
+            max-height: 450px;
+            text-align: center;
+          }
+          
+          .site-title {
+            z-index: 10;
+            margin: 0;
+            padding: 0;
+            font-size: 3.8rem;
+            font-weight: 700;
+            line-height: 1.15;
+            text-rendering: optimizeLegibility;
+          }
+          
+          .site-logo {
+            max-height: 45px;
+          }
+          
+          .site-description {
+            z-index: 10;
+            margin: 0;
+            padding: 5px 0;
+            font-size: 2.2rem;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+            opacity: 0.8;
+            line-height: 1.3em;
+          }
+          
+          /* Critical navigation structure */
+          .site-nav {
+            position: relative;
+            z-index: 300;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            overflow-y: hidden;
+            height: 40px;
+            font-size: 1.2rem;
+          }
+          
+          .site-nav-left {
+            display: flex;
+            align-items: center;
+            overflow-x: auto;
+            overflow-y: hidden;
+            margin-right: 10px;
+            padding-bottom: 80px;
+            letter-spacing: 0.4px;
+            white-space: nowrap;
+          }
+          
+          .site-nav-logo {
+            flex-shrink: 0;
+            display: block;
+            margin-right: 24px;
+            padding: 11px 0;
+            color: #fff;
+            font-size: 1.7rem;
+            line-height: 1em;
+            font-weight: bold;
+            letter-spacing: -0.5px;
+          }
+          
+          .site-nav-right {
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            height: 40px;
+          }
+          
+          .nav {
+            display: flex;
+            margin: 0 0 0 -12px;
+            padding: 0;
+            list-style: none;
+          }
+          
+          /* Critical footer structure */
+          .site-footer {
+            position: relative;
+            padding-top: 20px;
+            padding-bottom: 60px;
+            color: #fff;
+          }
+          
+          .site-footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.3rem;
+          }
+          
+          .site-footer-nav {
+            display: flex;
+          }
+          
+          /* Critical post feed layout */
+          .post-feed {
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -20px;
+            padding: 40px 0 0 0;
+          }
+          
+          /* Critical post card layout */
+          .post-card {
+            flex: 1 1 300px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            margin: 0 20px 40px;
+            min-height: 300px;
+            background: #fff center center;
+            background-size: cover;
+            border-radius: 5px;
+          }
+          
+          .post-card-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+          }
+          
+          /* Critical post card image layout */
+          .post-card-image-link {
+            position: relative;
+            display: block;
+            overflow: hidden;
+            border-radius: 5px 5px 0 0;
+            aspect-ratio: 16 / 9;
+          }
+          
+          .post-card-image {
+            width: 100%;
+            height: 100%;
+            background: #c5d2d9 no-repeat center center;
+            object-fit: cover;
+          }
+          
+          /* Critical post title structure for mobile */
+          .post-full-title {
+            margin: 0 0 0.5em 0;
+            font-size: 4.6rem;
+            font-weight: 700;
+            line-height: 1.15;
+            text-rendering: optimizeLegibility;
+          }
+          
+          /* Mobile responsive adjustments */
+          @media (max-width: 500px) {
+            .site-title {
+              font-size: 3rem;
+              line-height: 1.15;
+            }
+            .site-description {
+              font-size: 1.8rem;
+              line-height: 1.3em;
+            }
+            .post-full-title {
+              font-size: 2.9rem;
+              line-height: 1.15;
+            }
+          }
+          
+          @media (max-width: 700px) {
+            .site-nav-left {
+              margin-right: 0;
+              padding-left: 4vw;
+            }
+            .site-nav-right {
+              display: none;
+            }
+          }
+          
+          @media (max-width: 650px) {
+            .site-footer-content {
+              flex-direction: column;
+            }
+          }
+          
+          /* Desktop sidebar positioning */
+          @media (min-width: 1280px) {
             #sidebar {
                 position: fixed;
                 width: 320px;
@@ -24,42 +238,29 @@
                 left: 320px;
             }
           }
-          .post-card {
-                flex: 1 1 300px;
-                display: flex;
-                flex-direction: column;
-                overflow: hidden;
-                margin: 0 20px 40px;
-                min-height: 300px;
-                background: #fff center center;
-                background-size: cover;
-                border-radius: 5px;
-                box-shadow: rgba(39,44,49,0.06) 8px 14px 38px, rgba(39, 44, 49, 0.03) 1px 3px 8px;
-                transition: all 0.5s ease;
+          
+          /* Critical template-specific styles */
+          @media (min-width: 900px) {
+            .home-template .post-feed,
+            .tag-template .post-feed,
+            .author-template .post-feed {
+              margin-top: -70px;
+              padding-top: 0;
             }
-
-          .post-card-content {
-                -ms-flex-positive: 1;
-                flex-grow: 1;
-                display: -ms-flexbox;
-                display: flex;
-                -ms-flex-direction: column;
-                flex-direction: column;
-                -ms-flex-pack: justify;
-                justify-content: space-between;
-           }
-
-           .post-card-tags {
-                display: block;
-                margin-bottom: 4px;
-                color: #000;
-                font-size: 1.2rem;
-                line-height: 1.15em;
-                font-weight: 500;
-                letter-spacing: .5px;
-                text-transform: uppercase;
+            .home-template .site-nav {
+              position: relative;
+              top: -70px;
             }
+          }
+          
+          .home-template .site-header:after {
+            display: none;
+          }
     </style>
+    
+    {{!-- Preload critical font for faster rendering --}}
+    <link rel="preload" href="{{asset "css/fonts/josefottossonse.woff"}}" as="font" type="font/woff" crossorigin>
+    
     {{!-- Styles'n'Scripts --}}
     {{!-- Combined theme CSS (includes all styles and syntax highlighting) --}}
     <link rel="preload" href="{{asset "built/theme.css"}}" as="style" onload="this.onload=null;this.rel='stylesheet'">
