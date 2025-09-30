@@ -1,0 +1,84 @@
+# Example GitHub Actions Workflow for Static Site Deployment
+#
+# This is an EXAMPLE file. To use it:
+# 1. Rename to static-site-deploy.yml (remove .example)
+# 2. Configure your secrets in GitHub repository settings
+# 3. Customize deployment target (GitHub Pages, Netlify, etc.)
+#
+# Required Secrets (Settings → Secrets and variables → Actions):
+# - GHOST_API_URL: Your Ghost instance URL
+# - GHOST_CONTENT_API_KEY: Your Ghost Content API key
+
+name: Deploy Static Site
+
+# Trigger on push to main branch or manually
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  # Optional: trigger on schedule (e.g., rebuild daily)
+  # schedule:
+  #   - cron: '0 0 * * *'  # Daily at midnight
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          
+      - name: Install dependencies
+        run: |
+          npm ci
+          npm install --save-dev @11ty/eleventy @tryghost/content-api handlebars moment
+        
+      - name: Build static site
+        run: npm run static:deploy
+        env:
+          GHOST_API_URL: ${{ secrets.GHOST_API_URL }}
+          GHOST_CONTENT_API_KEY: ${{ secrets.GHOST_CONTENT_API_KEY }}
+          
+      # Option 1: Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        if: github.ref == 'refs/heads/main'
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_site
+          cname: your-domain.com  # Optional: your custom domain
+          
+      # Option 2: Deploy to Netlify
+      # - name: Deploy to Netlify
+      #   uses: nwtgck/actions-netlify@v2
+      #   with:
+      #     publish-dir: './_site'
+      #     production-branch: main
+      #     github-token: ${{ secrets.GITHUB_TOKEN }}
+      #     deploy-message: "Deploy from GitHub Actions"
+      #   env:
+      #     NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+      #     NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+      
+      # Option 3: Deploy to Vercel
+      # - name: Deploy to Vercel
+      #   uses: amondnet/vercel-action@v25
+      #   with:
+      #     vercel-token: ${{ secrets.VERCEL_TOKEN }}
+      #     vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+      #     vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+      #     working-directory: ./_site
+      
+      # Option 4: Upload artifacts (for manual download/deployment)
+      # - name: Upload static site artifact
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: static-site
+      #     path: _site/
+      #     retention-days: 7
