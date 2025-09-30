@@ -34,3 +34,4 @@ _data/*.json
 .env
 .cache
 content/
+posts/

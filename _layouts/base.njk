@@ -2,25 +2,55 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% if title %}{{ title }} - {% endif %}{{ site.title or "My Blog" }}</title>
+    <title>{% if title %}{{ title }} - {% endif %}JOS.StayPuft</title>
     <link rel="stylesheet" href="/assets/built/theme.css">
 </head>
-<body>
+<body class="{{ bodyClass }}">
     <div class="site-wrapper">
-        <header class="site-header">
-            <h1><a href="/">{{ site.title or "My Blog" }}</a></h1>
-            <p>{{ site.description or "A simple blog" }}</p>
-        </header>
-        
-        <main class="site-main">
-            {{ content | safe }}
+        <!-- Sidebar (Landscape) / Header (Portrait) -->
+        <div id="sidebar">
+            <div>
+                <!-- Header -->
+                <header class="site-header">
+                    <div class="site-header-content">
+                        <h1 class="site-title">
+                            <a href="/">JOS.StayPuft</a>
+                        </h1>
+                        <h2 class="site-description">A personal blogging theme</h2>
+                    </div>
+                </header>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                </ul>
+            </nav>
+            <div class="landscape">
+                <footer class="site-footer">
+                    <p>&copy; 2024 JOS.StayPuft</p>
+                </footer>
+            </div>
+        </div>
+
+        <!-- Main content -->
+        <main id="site-main" class="site-main outer">
+            <div class="inner">
+                <div class="main-body">
+                    {{ content | safe }}
+                </div>
+            </div>
         </main>
-        
-        <footer class="site-footer">
-            <p>&copy; 2024 {{ site.title or "My Blog" }}</p>
-        </footer>
+
+        <!-- Footer (Portrait mode only) -->
+        <div class="portrait">
+            <footer class="site-footer">
+                <p>&copy; 2024 JOS.StayPuft</p>
+            </footer>
+        </div>
     </div>
+
     <script defer async src="/assets/built/theme.js"></script>
 </body>
 </html>

@@ -1,14 +1,21 @@
 ---
-layout: base.njk
-title: Home
-bodyClass: home-template
 pagination:
-  data: collections.posts
-  size: 10
+  data: collections.tagList
+  size: 1
+  alias: tag
+permalink: /tag/{{ tag | slugify }}/
+layout: base.njk
+bodyClass: tag-template
 ---
 
+<header class="page-header">
+    <h1>{{ tag }}</h1>
+    <p>A collection of {{ collections.posts | filterByTag(tag) | length }} posts</p>
+</header>
+
 <div class="post-feed">
-    {% for post in collections.posts %}
+    {% set taggedPosts = collections.posts | filterByTag(tag) %}
+    {% for post in taggedPosts %}
     <article class="post-card{% if post.data.featured %} featured{% endif %}{% if not post.data.feature_image %} no-image{% endif %}">
         {% if post.data.feature_image %}
         <a class="post-card-image-link" href="{{ post.url }}">
@@ -18,11 +25,6 @@ pagination:
         <div class="post-card-content">
             <a class="post-card-content-link" href="{{ post.url }}">
                 <header class="post-card-header">
-                    {% if post.data.tags and post.data.tags.length > 0 %}
-                    <div class="post-card-tags">
-                        {{ post.data.tags[0] }}
-                    </div>
-                    {% endif %}
                     <h2 class="post-card-title">{{ post.data.title }}</h2>
                 </header>
                 <section class="post-card-excerpt">

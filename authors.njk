@@ -1,14 +1,21 @@
 ---
-layout: base.njk
-title: Home
-bodyClass: home-template
 pagination:
-  data: collections.posts
-  size: 10
+  data: collections.authorList
+  size: 1
+  alias: author
+permalink: /author/{{ author | slugify }}/
+layout: base.njk
+bodyClass: author-template
 ---
 
+<header class="page-header">
+    <h1>{{ author }}</h1>
+    <p>{{ collections.posts | filterByAuthor(author) | length }} posts</p>
+</header>
+
 <div class="post-feed">
-    {% for post in collections.posts %}
+    {% set authorPosts = collections.posts | filterByAuthor(author) %}
+    {% for post in authorPosts %}
     <article class="post-card{% if post.data.featured %} featured{% endif %}{% if not post.data.feature_image %} no-image{% endif %}">
         {% if post.data.feature_image %}
         <a class="post-card-image-link" href="{{ post.url }}">
@@ -30,11 +37,6 @@ pagination:
                 </section>
             </a>
             <footer class="post-card-meta">
-                <ul class="author-list">
-                    <li class="author-list-item">
-                        <span class="author-name">{{ post.data.author }}</span>
-                    </li>
-                </ul>
                 <div class="post-card-byline-content">
                     <span class="post-card-byline-date">
                         <time datetime="{{ post.date }}">{{ post.date | dateFormat }}</time>

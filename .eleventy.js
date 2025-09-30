@@ -5,62 +5,83 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("assets/built");
   eleventyConfig.addPassthroughCopy("assets/css/fonts");
   
-  // Add collections for posts and pages
-  eleventyConfig.addCollection("posts", function(collection) {
-    return collection.getFilteredByGlob("content/posts/*.md").sort((a, b) => {
-      return b.date - a.date; // Sort by date descending
+  // Collections
+  eleventyConfig.addCollection("posts", function(collectionApi) {
+    return collectionApi.getFilteredByGlob("posts/**/*.md").sort((a, b) => {
+      return b.date - a.date;
     });
   });
   
-  eleventyConfig.addCollection("pages", function(collection) {
-    return collection.getFilteredByGlob("content/pages/*.md");
+  eleventyConfig.addCollection("tagList", function(collectionApi) {
+    const tagSet = new Set();
+    collectionApi.getAll().forEach(item => {
+      if (item.data.tags) {
+        item.data.tags.forEach(tag => tagSet.add(tag));
+      }
+    });
+    return [...tagSet].sort();
   });
   
-  // Get featured posts
-  eleventyConfig.addCollection("featuredPosts", function(collection) {
-    return collection.getFilteredByGlob("content/posts/*.md")
-      .filter(post => post.data.featured)
-      .sort((a, b) => b.date - a.date);
+  eleventyConfig.addCollection("authorList", function(collectionApi) {
+    const authorSet = new Set();
+    collectionApi.getAll().forEach(item => {
+      if (item.data.author) {
+        authorSet.add(item.data.author);
+      }
+    });
+    return [...authorSet].sort();
   });
   
-  // Custom filters
+  // Filters
   eleventyConfig.addFilter("dateFormat", function(date, format) {
     return moment(date).format(format || 'MMMM Do, YYYY');
   });
   
-  eleventyConfig.addFilter("timeago", function(date) {
-    return moment(date).fromNow();
-  });
-  
   eleventyConfig.addFilter("limit", function(array, limit) {
-    if (!array || !Array.isArray(array)) return [];
     return array.slice(0, limit);
   });
   
-  eleventyConfig.addFilter("excerpt", function(content, length = 200) {
-    if (!content) return '';
-    const text = content.replace(/<[^>]+>/g, ''); // Strip HTML
-    return text.substring(0, length) + (text.length > length ? '...' : '');
+  eleventyConfig.addFilter("filterByTag", function(posts, tag) {
+    return posts.filter(post => post.data.tags && post.data.tags.includes(tag));
   });
   
-  // Ignore markdown docs (not content)
+  eleventyConfig.addFilter("filterByAuthor", function(posts, author) {
+    return posts.filter(post => post.data.author === author);
+  });
+  
+  eleventyConfig.addFilter("slugify", function(str) {
+    return str.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+  });
+  
+  eleventyConfig.addFilter("striptags", function(str) {
+    return str.replace(/<[^>]+>/g, '');
+  });
+  
+  eleventyConfig.addFilter("truncate", function(str, length) {
+    if (str.length <= length) return str;
+    return str.substring(0, length) + '...';
+  });
+  
+  // Ignore documentation markdown files
   eleventyConfig.ignores.add("README.md");
   eleventyConfig.ignores.add("BUILD.md");
   eleventyConfig.ignores.add("STATIC_*.md");
   eleventyConfig.ignores.add("IMPLEMENTATION_*.md");
   eleventyConfig.ignores.add("docs/**");
+  eleventyConfig.ignores.add(".github/**");
+  
+  // Don't use .gitignore (it ignores posts/)
+  eleventyConfig.setUseGitIgnore(false);
   
   return {
     dir: {
       input: ".",
       output: "_site",
       includes: "_includes",
-      layouts: "_layouts",
-      data: "_data"
+      layouts: "_layouts"
     },
     templateFormats: ["md", "njk", "html"],
     markdownTemplateEngine: "njk",
-    htmlTemplateEngine: "njk",
-    dataTemplateEngine: "njk"
+    htmlTemplateEngine: "njk"
   };
 };

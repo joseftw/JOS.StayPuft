@@ -15,12 +15,8 @@
         "test": "gscan .",
         "preship": "npm test",
         "ship": "STATUS=$(git status --porcelain); echo $STATUS; if [ -z \"$STATUS\" ]; then npm version patch && git push --follow-tags; fi",
-        "static:fetch": "node scripts/fetch-ghost-content.js",
-        "static:convert": "node scripts/convert-to-markdown.js",
-        "static:build": "node scripts/static-build.js",
-        "static:serve": "node scripts/static-build.js --serve",
-        "static:deploy": "node scripts/static-build.js",
-        "static:sample": "node scripts/create-sample-data.js"
+        "static:build": "npm run build && npx eleventy",
+        "static:serve": "npm run build && npx eleventy --serve"
     },
     "author": {
         "name": "Josef Ottosson",

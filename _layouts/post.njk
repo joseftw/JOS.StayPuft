@@ -1,32 +1,49 @@
 ---
 layout: base.njk
+bodyClass: post-template
+permalink: /{{ slug or (title | slugify) }}/
 ---
 
-<article class="post{% if featured %} featured{% endif %}">
-    <header class="post-header">
-        <h1 class="post-title">{{ title }}</h1>
-        <div class="post-meta">
-            <time datetime="{{ date }}">{{ date | dateFormat }}</time>
-            {% if author %}
-            <span class="post-author">by {{ author }}</span>
+<article class="post-full post{% if featured %} featured{% endif %}{% if not feature_image %} no-image{% endif %}">
+    <header class="post-full-header">
+        <h1 class="post-full-title">{{ title }}</h1>
+        <section class="post-full-meta">
+            <span class="post-time">
+                <i class='fa fa-calendar'></i>
+                <time datetime="{{ date }}">{{ date | dateFormat }}</time>
+            </span>
+            {% if tags and tags.length > 0 %}
+            <div class='post-tags'>
+                <i class='fa fa-tag'></i>
+                {% for tag in tags %}
+                <a href="/tag/{{ tag | slugify }}/">{{ tag }}</a>{% if not loop.last %}, {% endif %}
+                {% endfor %}
+            </div>
             {% endif %}
-        </div>
-        {% if tags %}
-        <div class="post-tags">
-            {% for tag in tags %}
-            <span class="tag">{{ tag }}</span>
-            {% endfor %}
-        </div>
-        {% endif %}
+        </section>
     </header>
-    
+
     {% if feature_image %}
-    <figure class="post-feature-image">
+    <figure class="post-full-image">
         <img src="{{ feature_image }}" alt="{{ title }}">
     </figure>
     {% endif %}
-    
-    <div class="post-content">
-        {{ content | safe }}
-    </div>
+
+    <section class="post-full-content">
+        <div class="post-content">
+            {{ content | safe }}
+        </div>
+    </section>
+
+    <footer class="post-full-footer">
+        {% if author %}
+        <section class="author-card">
+            <div class="author-card-content">
+                <h4 class="author-card-name">
+                    <a href="/author/{{ author | slugify }}/">{{ author }}</a>
+                </h4>
+            </div>
+        </section>
+        {% endif %}
+    </footer>
 </article>
