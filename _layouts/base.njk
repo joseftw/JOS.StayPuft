@@ -1,40 +1,156 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ site.locale }}">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% if title %}{{ title }} - {% endif %}JOS.StayPuft</title>
-    <link rel="stylesheet" href="/assets/built/theme.css">
+    
+    <title>{% if title %}{{ title }} - {% endif %}{{ site.title }}</title>
+    
+    <!-- Critical layout styles to prevent CLS -->
+    <style>
+          /* Critical layout structure */
+          .site-wrapper {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+          }
+          
+          .site-main {
+            z-index: 100;
+            flex-grow: 1;
+          }
+          
+          /* Critical sidebar header structure */
+          .site-header {
+            position: relative;
+            padding-top: 12px;
+            padding-bottom: 12px;
+            color: #fff;
+            margin: 2em 0;
+          }
+          
+          .site-header-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 10vw 4vw;
+            min-height: 200px;
+            max-height: 450px;
+            text-align: center;
+          }
+          
+          .site-title {
+            z-index: 10;
+            margin: 0;
+            padding: 0;
+            font-size: 3.8rem;
+            font-weight: 700;
+            line-height: 1.15;
+            text-rendering: optimizeLegibility;
+          }
+          
+          .site-logo {
+            max-height: 45px;
+          }
+          
+          .site-description {
+            z-index: 10;
+            margin: 0;
+            padding: 5px 0;
+            font-size: 2.2rem;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+            opacity: 0.8;
+            line-height: 1.3em;
+          }
+          
+          /* Critical navigation structure */
+          .site-nav {
+            position: relative;
+            z-index: 300;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            overflow-y: hidden;
+            height: 40px;
+            font-size: 1.2rem;
+          }
+          
+          /* Critical template-specific styles */
+          @media (min-width: 900px) {
+            .home-template .post-feed,
+            .tag-template .post-feed,
+            .author-template .post-feed {
+              margin-top: -70px;
+              padding-top: 0;
+            }
+            .home-template .site-nav {
+              position: relative;
+              top: -70px;
+            }
+          }
+          
+          .home-template .site-header:after {
+            display: none;
+          }
+    </style>
+    
+    <!-- Preload critical font for faster rendering -->
+    <link rel="preload" href="/assets/css/fonts/josefottossonse.woff" as="font" type="font/woff" crossorigin>
+    
+    <!-- Combined theme CSS (includes all styles and syntax highlighting) -->
+    <link rel="preload" href="/assets/built/theme.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/assets/built/theme.css"></noscript>
 </head>
-<body class="{{ bodyClass }}">
+<body class="{{ bodyClass or 'home-template' }}">
     <div class="site-wrapper">
+        
         <!-- Sidebar (Landscape) / Header (Portrait) -->
-        <div id="sidebar">
+        <div id="sidebar"{% if site.cover_image %} style="background-image: url({{ site.cover_image }})"{% endif %}>
             <div>
                 <!-- Header -->
                 <header class="site-header">
                     <div class="site-header-content">
-                        <h1 class="site-title">
-                            <a href="/">JOS.StayPuft</a>
-                        </h1>
-                        <h2 class="site-description">A personal blogging theme</h2>
+                        <div class="site-header-picture">
+                            {% if site.logo %}
+                                <a class="site-logo" href="{{ site.url }}"><img src="{{ site.logo }}" alt="{{ site.title }}"/></a>
+                            {% endif %}
+                        </div>
+                        <div class="site-header-text">
+                            <a href="{{ site.url }}"><h1 class="site-title">{{ site.title }}</h1></a>
+                            <h2 class="site-description">{{ site.description }}</h2>
+                        </div>
                     </div>
                 </header>
             </div>
+            
             <nav class="main-nav">
                 <ul>
-                    <li><a href="/">Home</a></li>
+                    {% for item in site.navigation %}
+                    <li><a href="{{ item.url }}">{{ item.label }}</a></li>
+                    {% endfor %}
                 </ul>
             </nav>
+            
             <div class="landscape">
+                <!-- Footer (Landscape mode only)-->
                 <footer class="site-footer">
-                    <p>&copy; 2024 JOS.StayPuft</p>
+                    <div class="site-footer-content">
+                        <nav class="site-footer-subscribe">
+                            <a href="{{ site.url }}/rss/" aria-label="Subscribe via RSS" target="_blank"><i class="fa fa-rss"></i>Subscribe via RSS</a>
+                        </nav>
+                        <nav class="site-footer-text">
+                            <section class="copyright">&copy; <a href="{{ site.url }}" aria-label="{{ site.title }}">{{ site.title }}</a> {{ '' | dateFormat('YYYY') }}</section>
+                        </nav>
+                    </div>
                 </footer>
             </div>
         </div>
 
-        <!-- Main content -->
+        <!-- All the main content gets inserted here -->
         <main id="site-main" class="site-main outer">
             <div class="inner">
                 <div class="main-body">
@@ -46,7 +162,14 @@
         <!-- Footer (Portrait mode only) -->
         <div class="portrait">
             <footer class="site-footer">
-                <p>&copy; 2024 JOS.StayPuft</p>
+                <div class="site-footer-content">
+                    <nav class="site-footer-subscribe">
+                        <a href="{{ site.url }}/rss/" aria-label="Subscribe via RSS" target="_blank"><i class="fa fa-rss"></i>Subscribe via RSS</a>
+                    </nav>
+                    <nav class="site-footer-text">
+                        <section class="copyright">&copy; <a href="{{ site.url }}" aria-label="{{ site.title }}">{{ site.title }}</a> {{ '' | dateFormat('YYYY') }}</section>
+                    </nav>
+                </div>
             </footer>
         </div>
     </div>

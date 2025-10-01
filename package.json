@@ -15,6 +15,7 @@
         "test": "gscan .",
         "preship": "npm test",
         "ship": "STATUS=$(git status --porcelain); echo $STATUS; if [ -z \"$STATUS\" ]; then npm version patch && git push --follow-tags; fi",
+        "static:fetch": "node scripts/fetch-from-rss.js",
         "static:build": "npm run build && npx eleventy",
         "static:serve": "npm run build && npx eleventy --serve",
         "static:demo": "node scripts/fetch-demo-content.js"
@@ -58,7 +59,8 @@
         "postcss-color-function": "^4.1.0",
         "postcss-custom-properties": "^13.3.10",
         "postcss-easy-import": "^4.0.0",
-        "rollup": "^4.52.3"
+        "rollup": "^4.52.3",
+        "xml2js": "^0.6.2"
     },
     "optionalDependencies": {
         "@11ty/eleventy": "^3.0.0",
