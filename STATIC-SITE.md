@@ -45,6 +45,8 @@ This will:
 - Build the CSS and JS assets
 - Read all markdown files from `posts/`
 - Generate HTML pages in `dist/`
+- Generate tag pages for each unique tag (e.g., `/tag/dotnet/`)
+- Generate author page at `/author/josef-ottosson/`
 - Create an RSS feed at `dist/rss.xml`
 
 ### 5. Preview Locally
@@ -93,10 +95,29 @@ console.log('Syntax highlighting works!');
 │   ├── js/                   # Source JS files
 │   └── built/                # Built/minified assets (generated)
 ├── dist/                     # Generated static site (generated)
+│   ├── index.html            # Home page
+│   ├── post-slug/            # Individual post pages
+│   ├── tag/                  # Tag archive pages
+│   │   ├── dotnet/
+│   │   ├── asp.net-core/
+│   │   └── ...
+│   ├── author/               # Author pages
+│   │   └── josef-ottosson/
+│   └── rss.xml              # RSS feed
 ├── generate.js               # Static site generator script
 ├── fetch-posts.js            # Script to fetch posts from RSS
 └── package.json              # Dependencies and scripts
 ```
+
+## Generated Pages
+
+The generator creates the following pages:
+
+- **Home page** (`/`) - Lists all posts in reverse chronological order
+- **Individual post pages** (`/post-slug/`) - Full content for each post
+- **Tag pages** (`/tag/tag-name/`) - Lists all posts with a specific tag
+- **Author page** (`/author/author-name/`) - Lists all posts by the author
+- **RSS feed** (`/rss.xml`) - Full RSS feed with all posts
 
 ## Design Preservation
 

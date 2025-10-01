@@ -566,6 +566,65 @@ function generateRSS(posts, outputDir) {
   console.log('Generated: rss.xml');
 }
 
+// Generate tag page
+function generateTagPage(tagName, tagSlug, tagPosts, outputDir) {
+  const postCards = tagPosts.map(post => generatePostCard(post)).join('\n');
+  const bodyContent = `<div class="post-feed">\n${postCards}\n</div>`;
+  const pageTitle = `${tagName} - ${siteConfig.title}`;
+  const html = generateLayout('tag-template', pageTitle, bodyContent);
+  
+  const tagDir = path.join(outputDir, 'tag', tagSlug);
+  if (!fs.existsSync(tagDir)) {
+    fs.mkdirSync(tagDir, { recursive: true });
+  }
+  
+  const tagPath = path.join(tagDir, 'index.html');
+  fs.writeFileSync(tagPath, html);
+  console.log(`Generated: tag/${tagSlug}/index.html`);
+}
+
+// Generate all tag pages
+function generateAllTagPages(posts, outputDir) {
+  // Collect all unique tags
+  const tagsMap = new Map();
+  
+  posts.forEach(post => {
+    if (post.tags && post.tags.length > 0) {
+      post.tags.forEach(tag => {
+        const tagSlug = tag.toLowerCase().replace(/\s+/g, '-');
+        if (!tagsMap.has(tagSlug)) {
+          tagsMap.set(tagSlug, { name: tag, slug: tagSlug, posts: [] });
+        }
+        tagsMap.get(tagSlug).posts.push(post);
+      });
+    }
+  });
+  
+  // Generate a page for each tag
+  tagsMap.forEach((tagData) => {
+    generateTagPage(tagData.name, tagData.slug, tagData.posts, outputDir);
+  });
+  
+  console.log(`Generated ${tagsMap.size} tag pages`);
+}
+
+// Generate author page
+function generateAuthorPage(posts, outputDir) {
+  const postCards = posts.map(post => generatePostCard(post)).join('\n');
+  const bodyContent = `<div class="post-feed">\n${postCards}\n</div>`;
+  const pageTitle = `${siteConfig.title}`;
+  const html = generateLayout('author-template', pageTitle, bodyContent);
+  
+  const authorDir = path.join(outputDir, 'author', siteConfig.title.toLowerCase().replace(/\s+/g, '-'));
+  if (!fs.existsSync(authorDir)) {
+    fs.mkdirSync(authorDir, { recursive: true });
+  }
+  
+  const authorPath = path.join(authorDir, 'index.html');
+  fs.writeFileSync(authorPath, html);
+  console.log(`Generated: author/${siteConfig.title.toLowerCase().replace(/\s+/g, '-')}/index.html`);
+}
+
 // Main build function
 function build() {
   console.log('Building static site...');
@@ -589,6 +648,8 @@ function build() {
   
   generateIndex(posts, outputDir);
   posts.forEach(post => generatePost(post, posts, outputDir));
+  generateAllTagPages(posts, outputDir);
+  generateAuthorPage(posts, outputDir);
   generateRSS(posts, outputDir);
   
   console.log('Build complete!');

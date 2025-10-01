@@ -14,7 +14,7 @@ The main content area displays:
 - Post titles, excerpts, and metadata
 - Tags and reading time
 
-![Desktop Home Page](/tmp/screenshots/final-desktop-home.png)
+![Desktop Home Page](screenshots/desktop-home.png)
 
 ## Mobile View (375x667)
 
@@ -24,7 +24,31 @@ The mobile view shows:
 - Footer at the bottom
 - All content is fully accessible
 
-![Mobile Home Page](/tmp/screenshots/final-mobile-home.png)
+![Mobile Home Page](screenshots/mobile-home.png)
+
+## Tag Pages
+
+Tag pages display all posts with a specific tag.
+
+**Desktop:**
+
+![Desktop Tag Page](screenshots/desktop-tag-page.png)
+
+**Mobile:**
+
+![Mobile Tag Page](screenshots/mobile-tag-page.png)
+
+## Author Pages
+
+Author pages display all posts by a specific author.
+
+**Desktop:**
+
+![Desktop Author Page](screenshots/desktop-author-page.png)
+
+**Mobile:**
+
+![Mobile Author Page](screenshots/mobile-author-page.png)
 
 ## Key Features Verified
 
