@@ -101,9 +101,10 @@
     <!-- Preload critical font for faster rendering -->
     <link rel="preload" href="/assets/css/fonts/josefottossonse.woff" as="font" type="font/woff" crossorigin>
     
-    <!-- Combined theme CSS (includes all styles and syntax highlighting) -->
-    <link rel="preload" href="/assets/built/theme.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/assets/built/theme.css"></noscript>
+    <!-- Theme CSS (screen.css + staypuft.css + prism.css) -->
+    <link rel="stylesheet" href="/assets/css/screen.css">
+    <link rel="stylesheet" href="/assets/css/staypuft.css">
+    <link rel="stylesheet" href="/assets/css/prism.css">
 </head>
 <body class="{{ bodyClass or 'home-template' }}">
     <div class="site-wrapper">
@@ -174,6 +175,7 @@
         </div>
     </div>
 
-    <script defer async src="/assets/built/theme.js"></script>
+    <!-- Theme JavaScript (Prism syntax highlighting) -->
+    <script defer async src="/assets/js/prism.js"></script>
 </body>
 </html>

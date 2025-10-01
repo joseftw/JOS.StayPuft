@@ -2,8 +2,9 @@ const moment = require('moment');
 
 module.exports = function(eleventyConfig) {
   // Copy static assets
-  eleventyConfig.addPassthroughCopy("assets/built");
-  eleventyConfig.addPassthroughCopy("assets/css/fonts");
+  eleventyConfig.addPassthroughCopy({"assets/css": "assets/css"});
+  eleventyConfig.addPassthroughCopy({"assets/built": "assets/built"});
+  eleventyConfig.addPassthroughCopy({"assets/js": "assets/js"});
   
   // Add computed data for post permalinks
   eleventyConfig.addGlobalData("eleventyComputed", {
