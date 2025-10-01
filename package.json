@@ -16,8 +16,8 @@
         "preship": "npm test",
         "ship": "STATUS=$(git status --porcelain); echo $STATUS; if [ -z \"$STATUS\" ]; then npm version patch && git push --follow-tags; fi",
         "static:fetch": "node scripts/fetch-from-rss.js",
-        "static:build": "npm run build && npx eleventy",
-        "static:serve": "npm run build && npx eleventy --serve",
+        "static:build": "node scripts/build-assets.js && npx eleventy",
+        "static:serve": "node scripts/build-assets.js && npx eleventy --serve",
         "static:demo": "node scripts/fetch-demo-content.js"
     },
     "author": {

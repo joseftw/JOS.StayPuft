@@ -35,3 +35,4 @@ _data/*.json
 .cache
 content/
 posts/
+assets/built/

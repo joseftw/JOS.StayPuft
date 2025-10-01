@@ -79,6 +79,20 @@
             font-size: 1.2rem;
           }
           
+          /* Desktop sidebar positioning */
+          @media (min-width: 1280px) {
+            #sidebar {
+                position: fixed;
+                width: 320px;
+                height: 100%;
+            }
+
+            #site-main {
+                position: absolute;
+                left: 320px;
+            }
+          }
+          
           /* Critical template-specific styles */
           @media (min-width: 900px) {
             .home-template .post-feed,
@@ -101,10 +115,9 @@
     <!-- Preload critical font for faster rendering -->
     <link rel="preload" href="/assets/css/fonts/josefottossonse.woff" as="font" type="font/woff" crossorigin>
     
-    <!-- Theme CSS (screen.css + staypuft.css + prism.css) -->
-    <link rel="stylesheet" href="/assets/css/screen.css">
-    <link rel="stylesheet" href="/assets/css/staypuft.css">
-    <link rel="stylesheet" href="/assets/css/prism.css">
+    <!-- Theme CSS (combined built file) -->
+    <link rel="preload" href="/assets/built/theme.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/assets/built/theme.css"></noscript>
 </head>
 <body class="{{ bodyClass or 'home-template' }}">
     <div class="site-wrapper">
@@ -175,7 +188,7 @@
         </div>
     </div>
 
-    <!-- Theme JavaScript (Prism syntax highlighting) -->
-    <script defer async src="/assets/js/prism.js"></script>
+    <!-- Theme JavaScript Bundle (includes Prism syntax highlighting and infinite scroll) -->
+    <script defer async src="/assets/built/theme.js"></script>
 </body>
 </html>
