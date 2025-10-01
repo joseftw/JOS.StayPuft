@@ -5,6 +5,18 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("assets/built");
   eleventyConfig.addPassthroughCopy("assets/css/fonts");
   
+  // Add computed data for post permalinks
+  eleventyConfig.addGlobalData("eleventyComputed", {
+    permalink: (data) => {
+      // Only for markdown posts
+      if (data.page.inputPath && data.page.inputPath.includes('/posts/') && data.page.inputPath.endsWith('.md')) {
+        const slug = data.slug || data.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+        return `/${slug}/`;
+      }
+      return data.permalink;
+    }
+  });
+  
   // Collections
   eleventyConfig.addCollection("posts", function(collectionApi) {
     return collectionApi.getFilteredByGlob("posts/**/*.md").sort((a, b) => {
@@ -81,7 +93,7 @@ module.exports = function(eleventyConfig) {
       layouts: "_layouts"
     },
     templateFormats: ["md", "njk", "html"],
-    markdownTemplateEngine: "njk",
+    markdownTemplateEngine: false, // Don't process markdown with Nunjucks
     htmlTemplateEngine: "njk"
   };
 };

@@ -16,7 +16,8 @@
         "preship": "npm test",
         "ship": "STATUS=$(git status --porcelain); echo $STATUS; if [ -z \"$STATUS\" ]; then npm version patch && git push --follow-tags; fi",
         "static:build": "npm run build && npx eleventy",
-        "static:serve": "npm run build && npx eleventy --serve"
+        "static:serve": "npm run build && npx eleventy --serve",
+        "static:demo": "node scripts/fetch-demo-content.js"
     },
     "author": {
         "name": "Josef Ottosson",
