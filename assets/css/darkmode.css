@@ -1,0 +1,132 @@
+/* Dark Mode Styles - Permanent Dark Theme
+/* ---------------------------------------------------------- */
+
+/* Dark mode colors applied globally */
+:root {
+    --bg-color: #15171A;
+    --text-color: #e5eff5;
+    --card-bg-color: #1e2124;
+    --card-text-color: #e5eff5;
+    --sidebar-bg-color: #0a0c0e;
+    --sidebar-text-color: #9ebec3;
+    --sidebar-text-hover: white;
+    --code-bg-color: #0a0c0e;
+    --code-text-color: #e5eff5;
+    --border-color: #2d3135;
+    --meta-color: #9ebec3;
+}
+
+/* Apply dark theme colors */
+body {
+    background: var(--bg-color) !important;
+    color: var(--text-color);
+}
+
+.post-card {
+    background: var(--card-bg-color) !important;
+    box-shadow: rgba(0,0,0,0.3) 8px 14px 38px, rgba(0, 0, 0, 0.2) 1px 3px 8px;
+}
+
+.site-main,
+.inner {
+    background: transparent;
+}
+
+.post-card-title,
+.post-card-excerpt,
+.post-card-content-link {
+    color: var(--card-text-color);
+}
+
+.post-full-content,
+.post-full-content p,
+.post-full-content h1,
+.post-full-content h2,
+.post-full-content h3,
+.post-full-content h4,
+.post-full-content h5,
+.post-full-content h6,
+.post-full-title,
+.byline-content,
+.author-card-content,
+.read-next-card-content {
+    color: var(--text-color);
+}
+
+.post-card-meta,
+.post-full-meta,
+.author-card-content p,
+.byline-meta-content {
+    color: var(--meta-color);
+}
+
+/* Sidebar in dark mode */
+#sidebar,
+.site-footer {
+    background-color: var(--sidebar-bg-color);
+}
+
+/* Adjust tag/author header in dark mode */
+.tag-header.site-header,
+.author-header.site-header {
+    background: var(--card-bg-color);
+}
+
+/* Code blocks in dark mode */
+pre,
+code,
+.post-full-content pre,
+.post-full-content code {
+    background: var(--code-bg-color);
+    color: var(--code-text-color);
+}
+
+/* Read next card in dark mode */
+.read-next-card {
+    background: var(--card-bg-color);
+}
+
+/* Subscribe form in dark mode */
+.subscribe-overlay-content {
+    background: var(--card-bg-color);
+    color: var(--text-color);
+}
+
+.subscribe-overlay-title,
+.subscribe-overlay-description {
+    color: var(--text-color);
+}
+
+.subscribe-email {
+    background: var(--bg-color);
+    border-color: var(--border-color);
+    color: var(--text-color);
+}
+
+/* Form inputs in dark mode */
+input,
+textarea {
+    background: var(--bg-color);
+    border-color: var(--border-color);
+    color: var(--text-color);
+}
+
+/* Links adjusted for dark mode */
+a {
+    color: #5a9cff;
+}
+
+a:hover {
+    color: #00d4ff;
+}
+
+/* Post meta elements */
+.post-card-meta span {
+    color: var(--text-color);
+}
+
+/* Ensure images don't get affected */
+img {
+    opacity: 0.9;
+}
+
